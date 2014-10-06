@@ -1,0 +1,472 @@
+\documentclass[12pt,reqno]{amsart}
+\usepackage[top=2cm, left=2cm,right=2cm,bottom=2cm]{geometry}
+\renewcommand{\baselinestretch}{1.2}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{color,hyperref,enumerate,multicol}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.3}
+\hypersetup{colorlinks,breaklinks,
+            linkcolor=darkblue,urlcolor=darkblue,
+            anchorcolor=darkblue,citecolor=darkblue}
+\pagestyle{empty}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\<}{\ensuremath{\langle}}
+\renewcommand{\>}{\ensuremath{\rangle}}
+\newcommand{\meet}{\ensuremath{\wedge}}
+\newcommand{\Meet}{\ensuremath{\bigwedge}}
+\newcommand{\join}{\ensuremath{\vee}}
+\renewcommand{\emptyset}{\ensuremath{\varnothing}}
+\renewcommand{\subset}{\ensuremath{\subsetneq}}
+\newcommand{\boldemph}{\emph}
+\newcommand{\lcm}{\operatorname{lcm}}
+\newtheorem*{lemma}{Lemma}
+
+\begin{document}
+\thispagestyle{empty}
+
+\noindent \textbf{Math 301} \hskip5cm {\bf Homework 5} \hfill {\bf Fall 2014}
+\vskip1cm
+\noindent {\bf Chapter 4:}  6, 12, 13, 28, 30, 35.\\  
+{\bf Due date:} Friday, 10/03
+
+\medskip
+
+\noindent (Exercise numbers correspond to the printed textbook, generated from 2013/08/16 source files.)
+
+\medskip
+
+\begin{enumerate}
+
+%% 6 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item[{\bf 6.}]
+Find the order of every element in the symmetry group of the square,
+$D_4$.
+
+\medskip 
+\noindent {\bf Solution:}\\
+\noindent In Exercise 5 of Homework 3, we found all eight elements of the group
+of symmetries of a square, also known as the dihedral group on four 
+letters, denoted $D_4$.
+
+To identify the elements of this group, we imagined a square with vertices labeled
+counter-clockwise: 1 in the south-west corner, 2 in the south-east corner, 3 in
+the north-east corner, and 4 in the north-west corner. The result looks
+something like this: 
+$$\begin{bmatrix} 4 & 3 \\ 1 & 2 \end{bmatrix}$$
+
+The universe of this group is 
+$\{e, \mu_1, \mu_2, \mu_3, \mu_4, \rho_1, \rho_2, \rho_3\}$, 
+the elements of which are defined as follows:
+\begin{itemize}
+\item 
+$e = \begin{pmatrix} 1 & 2 & 3 & 4\\ 1 & 2 & 3 & 4 \end{pmatrix} = (\;)$
+(the identity)
+\smallskip
+\item 
+$\mu_1 = \begin{pmatrix}1 & 2 & 3 &4\\1 & 4 & 3 &2\end{pmatrix} = (2,4)$
+(reflection across 45 degree line)
+\smallskip
+\item 
+$\mu_2 = \begin{pmatrix}1 & 2 & 3 &4\\2 & 1 & 4 &3\end{pmatrix} =(1,2)(3,4)$
+(reflection across vertical line)
+\smallskip
+\item
+$\rho_1 = \begin{pmatrix}1 & 2 & 3 &4\\2 & 3 & 4 &1\end{pmatrix} = (1,2,3,4)$
+(rotation by 90 degrees)
+\smallskip
+\item 
+$\mu_3 = \begin{pmatrix}1 & 2 & 3 &4\\3 & 2 & 1 &4\end{pmatrix} = (1,3)$
+(reflection across -45 degree line)
+\smallskip
+\item 
+$\rho_2 = \begin{pmatrix}1 & 2 & 3 &4\\3 & 4 & 1 &2\end{pmatrix} = (1,3)(2,4)$
+(rotation by 180 degrees)
+\smallskip
+\item 
+$\rho_3 = \begin{pmatrix}1 & 2 & 3 &4\\4 & 1 & 2 &3\end{pmatrix} =(1,4,3,2)$
+(rotation by -90 degrees)
+\smallskip
+\item 
+$\mu_4 = \begin{pmatrix}1 & 2 & 3 &4\\4 & 3 & 2 &1\end{pmatrix} = (1,4)(2,3)$
+(reflection across horizontal line)
+\end{itemize}
+\medskip
+Since the order of an element $x$ is the smallest positive integer $k$ such that
+$x^k = e$, we can find the order by simply computing higher powers and stopping
+when we get to $e$.  However, for the group of symmetries of a square, it's even
+easier.  For example, it's obvious that a reflection across a line, executed
+twice, leaves the points in their original position, so reflections have order
+2.  Rotations of $\pm 90$ degrees have order 4, and 180 degree rotations have
+order 2. 
+
+To summarize, $\mu_1^2 = \mu_2^2= \mu_3^2= \mu_4^2=e$, so the reflections have
+order 2.
+As for the rotations, $\rho_1^4 = e = \rho_3^4$, and 4 is the smallest such
+positive integer, so  $|\rho_1| = 4 = |\rho_3|$, whereas
+$\rho_2^2 = e$, so $|\rho_2| = 2$.
+We can confirm this answer with just two lines of Sage/Python code.
+Using the format $(g, |g|)$, the following produces a list of orders of elements
+$g\in D_4$:
+{\small
+\begin{verbatim}
+G = DihedralGroup(4)
+[(x, x.order()) for x in G.list()]
+\end{verbatim}
+}
+\noindent From the output, we can read off the order of the elements
+of this group:
+{\footnotesize
+\[
+\left[\left((), 1\right), \left((2,4), 2\right), \left((1,2)(3,4), 2\right),
+  \left((1,2,3,4), 4\right), \left((1,3), 2\right), \left((1,3)(2,4), 2\right),
+  \left((1,4,3,2), 4\right), \left((1,4)(2,3), 2\right)\right]
+\]
+}
+\medskip 
+
+%% 12 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item[{\bf 12.}]
+Find a cyclic group with exactly one generator.  Can you find cyclic
+groups with exactly two generators?  Four generators?  How about $n$
+generators?
+
+\medskip 
+\noindent {\bf Solution:}
+The cyclic group $\Z_2 = \<\{0, 1\}, +, -, 0\>$ has exactly one
+generator, namely the element 1.
+The cyclic group $\Z_3 = \<\{0, 1, 2\}, +, -, 0\>$ has exactly two
+generators, namely 1 and 2.
+Notice that the cyclic group $\Z_4$ still has only two generators.
+However, in the cyclic group $\Z_5 = \<\{0, 1, 2, 3, 4\}, +, -, 0\>$, all four
+non-identity elements are generators, since they are relatively prime to 5.
+More generally, by the same argument, we see that for any prime $p$ the group 
+$\Z_p = \<\{0, 1, \dots, p-1\}, +, -, 0\>$ has $p-1$ generators.  What about 3?
+What about $n$?
+
+\medskip 
+
+
+
+%% 13 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item[{\bf 13.}]
+For $n \leq 20$, which groups $U(n)$ are cyclic?  Make a conjecture as
+to what is true in general.  Can you prove your conjecture?  
+ 
+\medskip
+\noindent {\bf Solution:}
+The elements of $U(n)$ are the \emph{multiplicative units} of the set
+$\{0, 1, 2, \dots, n-1\}$ with respect to multiplication modulo $n$.  What this
+means is that, 
+for each $x \in \{0, 1, 2, \dots, n-1\}$, we have
+$x \in U(n)$ if and only there exists $y \in \{0, 1, 2, \dots, n-1\}$ such that
+$x\cdot y = 1$, where $\cdot$ means multiplication modulo $n$.  As we have seen,
+$x\in U(n)$ if and only if $x$ and $n$ are relatively prime.
+
+Given $n$, if we wish to determine whether $U(n)$ is cyclic, the most direct
+approach would be to first compute $m = |U(n)|$ and then compute the order of
+each element of $U(n)$ to determine whether there exists 
+$x \in U(n)$ such that $|x| = m$.  If such an element exists, then it generates
+$U(n)$. This is certainly the first approach the student should try in order to
+gain more familiarity with unit groups.
+
+After generating some examples, to speed things up we could let Python (or
+Sage or GAP) do the work for us.  Some Python and GAP code is given in the
+appendix below for printing, for each $2\leq n \leq 20$, those elements in 
+$\{0, 1, 2, \dots, n-1\}$ that are relatively prime to $n$.
+(As remarked above, these are precisely the elements of $U(n)$.) 
+
+After a fair amount of calculation (or using the programs given in the
+appendix below), we find that $U(n)$ is cyclic when 
+$n \in \{2, 3, 4, 5, 6, 7, 9, 10, 11, 13, 14, 17, 18, 19\}$, and not cyclic 
+when $n \in \{8, 12, 15, 16, 20\}$. 
+Here is a list of conjectures we might arrive at after contemplating our
+computational results:
+\begin{enumerate}
+\item 
+The group $U(4n)$ is not cyclic for $n \geq 2$.
+\item The group $U(n)$ is cyclic for $n$ prime.
+\item The group $U(n)$ is cyclic for $n = 2p$ where $p$ is a prime.
+\item If $n$ is an odd number such that $U(n)$ is cyclic, then $U(2n)$ 
+is cyclic also.
+\item If $p$ and $q$ are odd primes, then $U(pq)$ is not cyclic.
+\end{enumerate}
+We do not yet have enough tools at our disposal to prove all of these,
+but we can certainly prove the first. (Some students, especially those who
+took a course in number theory, can probably prove the second.)
+
+To prove the first conjecture, we need a little lemma from 
+\emph{Cyclic Group Supplement 2} 
+that we quote here without proof.\footnote{The statement and proof
+  of this lemma are provided in the document 
+  \href{https://github.com/williamdemeo/Math301-Fall2014/blob/master/misc/CyclicgroupSupplement2.pdf}{CyclicgroupSupplement2.pdf}
+  which resides in the
+  \href{https://github.com/williamdemeo/Math301-Fall2014/tree/master/misc}{misc}
+  directory of our GitHub repository. 
+}
+\begin{lemma}
+A cyclic group contains at most one element of order 2.  
+\end{lemma}
+
+\noindent 
+{\it Proof of (a):} To prove the first conjecture above, we show that
+for $n\geq 2$ the group $U(4n)$ has two elements of order 2, hence, by the
+lemma, cannot be cyclic.   
+
+The group $U(4n)$ contains those elements of the set 
+$\Z_{4n} = \{0, 1, \dots, 4n-1\}$ that are relatively prime to $4n$.
+The element $2n - 1$ belongs to $\Z_{4n}$ and is, in fact, relatively prime to
+$4n$, so $2n - 1\in U(4n)$.
+To see this, use the Euclidean Algorithm (page 25 of the text):
+\begin{align*}
+4n &= (2n-1) \cdot 2 + 2\\
+2n-1 &= 2\cdot (n-1) + 1\\
+n-1 &= 1\cdot (n-1) + 0
+\end{align*}
+Arriving at $1$ as the first coefficient on the right hand side of the last
+equation in the Euclidean Algorithm shows that $\gcd(4n, 2n-1) = 1$.
+By a similar argument, $4n-1 \in U(4n)$.  
+
+Now, 
+\[
+(2n-1)^2 = 4n^2 -4n +1 \equiv 1 \pmod{4n}, 
+\]
+\[
+(4n-1)^2 = 16n^2 -8n +1 \equiv 1 \pmod{4n},
+\]
+so $2n-1$ and $4n-1$ are two distinct involutions of $U(n)$. By the lemma, then,
+$U(4n)$ is not cyclic.
+
+%% that 2 = 1 · 4n + (−2) · (2n − 1), and so
+%% 1 = (−1) · (2n − 1) + n · 2
+%% = (−1) · (2n − 1) + n · (4n) + (−2n) · (2n − 1),
+%% and hence 1 is an integer linear combination of 2n − 1 and 4n, so
+%% gcd(2n − 1, 4n) = 1. Now, we have that
+%% [2n − 1]2 = [4n
+%% 2 − 4n + 1] = [1],
+%% so [2n−1] is an element of order 2 in U(4n), provided that [2n−1] 6=
+%% 1. But [2n − 1] = [1] if and only if 2n − 1 = 1, which happens only
+%% if n = 1.
+
+
+\medskip 
+
+
+%% 28 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item[{\bf 28.}]
+Let $a$ be an element in a group $G$. What is a generator for the
+subgroup $\langle a^m \rangle  \cap  \langle a^n \rangle $?
+ 
+\medskip
+\noindent {\bf Solution:}
+If $m$ divides $n$, then $\<a^n\> \leq \<a^m\>$, so
+ $\langle a^m \rangle  \cap  \langle a^n \rangle = \<a^n\>$ and 
+$a^n$ is a generator.
+Similarly, if $n$ divides $m$, then $\<a^m\> \leq \<a^n\>$, so
+$\langle a^m \rangle  \cap  \langle a^n \rangle = \<a^m\>$ and 
+$a^m$ is a generator.
+Since these two cases are easily dispensed with, let's require
+of $m$ and $n$ that neither one divides the other. 
+
+An element $x$ of $\langle a^m \rangle  \cap  \langle a^n \rangle $ must have the form
+$x = a^{mj} = a^{nk}$.  
+So every element is $a^t$, where $t$ is a common multiple of $m$ and $n$.
+It is only natural, then, to suspect that the generator of this subgroup should
+be the element $a^\ell$, where $\ell$ is the \emph{least} common multiple of $m$
+and $n$. This heuristic reasoning leads us to the statement that we wish to prove.
+
+\medskip
+\noindent {\bf Claim:} If $\ell = \lcm(m,n)$, then $a^\ell$ generates 
+$\langle a^m \rangle  \cap  \langle a^n \rangle$.
+\begin{proof}
+Let $x$ be an arbitrary non-identity element of 
+$\langle a^m \rangle  \cap \langle a^n \rangle$.  We will show that 
+$x = a^{\ell d}$
+for some $d$, which will prove that $a^\ell$ generates 
+$\langle a^m \rangle \cap \langle a^n \rangle$. 
+
+As noted above, $x = a^{mj} = a^{nk}$, for some positive integers $j$ and
+$k$. We can assume that $j$ and $k$ are the least positive integers with
+these properties.  Then $mj = nk = t$, so $x = a^t$, where $t$ is a common multiple
+of $m$ and $n$.  Since $\ell$ is the least common multiple, we have $\ell|t$, so
+there exists $d$ such that $\ell d = t$.  Therefore, $x = a^t = a^{\ell d}$.
+\end{proof}
+\medskip 
+
+
+
+
+%% 30 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item[{\bf 30.}]
+Suppose that $G$ is a group and let $a$, $b \in G$. Prove that if $|a|
+= m$ and $|b| = n$ with $\gcd(m,n) = 1$, then 
+$\langle a \rangle  \cap \langle b \rangle  = \{ e \}$. 
+ 
+\medskip
+\noindent {\bf Solution:}
+%Therefore, $\<a\> \cap \<b\>$ is a subgroup of $G$. 
+Let $x$ be an arbitrary element of $\<a\> \cap \<b\>$.  We will show that $x = e$.
+Indeed, $x$ belongs to both of the cyclic subgroups $\<a\>$ and $\<b\>$ and, from
+Exercise 38 below, we know that the order of an element of a cyclic 
+group divides the order of the group.  Thus, $|x|$ is a common divisor of
+$m$ and $n$, so $\gcd(m,n)=1$ implies $|x| = 1$. Therefore, $x=e$.
+\qed
+\medskip 
+
+%% 35 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item[{\bf 35.}]
+Prove that the subgroups of ${\mathbb Z}$ are exactly $n{\mathbb Z}$ for $n
+= 0, 1, 2, \ldots$. 
+
+ 
+\medskip
+\noindent {\bf Solution:}
+In lecture we proved Theorem 4.3 which states that every
+subgroup of a cyclic group is cyclic.  Certainly $\Z$ is cyclic, since it is
+generated by $1$.  Take an arbitrary subgroup $H\leq \Z$. Then $H$ is cyclic, so
+$H = \<n\>$ for some $n$. That is, $H = \{nk : k \in \Z\} = n\Z$. Conversely, if
+$n$ is any number in $\{0, 1, 2, \dots\}$, then the set $n\Z = \{nk: k\in \Z\}$
+is closed under integer addition, additive inverse, and contains $0$, so $n\Z$
+is a subgroup of $\Z$. 
+\qed 
+\medskip 
+
+%% 38 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item[{\bf 38.}]
+Prove that the order of an element in a cyclic group $G$ must divide
+the order of the  group. 
+
+\medskip
+\noindent {\bf Solution:}
+Let $G = \<a\>$ be a cyclic group. We can assume $G$ is finite (otherwise the
+statement in this exercise wouldn't make sense), so suppose $|G|= |a| = n$.  Let
+$x \in G$ be an 
+arbitrary element and suppose $|x| = m$.  We wish to show that $m$ divides $n$.
+As usual, we employ the Division Algorithm, which says there exist integers $q$
+and $r$ such that $n = qm + r$, where $0 \leq r < m$.  The goal is to show 
+$r = 0$, since, if we accomplish this, then we will have shown $n = qm$, that
+is, $m$ divides $n$. 
+
+Since $a$ generates the group, there is some integer $0< j < n$ such that 
+$a^j =x$. Therefore, $x^n = a^{jn} = a^{nj} = e^j = e$, so, 
+\[
+e = x^n = x^{qm + r} = x^{qm}x^r= x^{mq} x^r= e^q x^r = e x^r = x^r.
+\]
+That is, $x^r = e$.  But the order of $x$ is $m$, which is the least positive integer
+such that $x^m = e$. This and $0 \leq r < m$ together imply $r = 0$. 
+\qed
+
+
+\end{enumerate}
+
+\newpage
+
+\appendix
+
+\section{Computing with the Dihedral Group}
+In Exercise 6, we wanted the elements of the dihedral group on four letters, and
+the order of each element.  Using the format $(g, |g|)$, the following produces
+a list of orders of elements $g\in D_4$:
+{\small
+\begin{verbatim}
+G = DihedralGroup(4)
+[(x, x.order()) for x in G.list()]
+\end{verbatim}
+}
+\noindent From the output, we can read off the order of the elements
+of this group:
+{\footnotesize
+\[
+\left[\left((), 1\right), \left((2,4), 2\right), \left((1,2)(3,4), 2\right),
+  \left((1,2,3,4), 4\right), \left((1,3), 2\right), \left((1,3)(2,4), 2\right),
+  \left((1,4,3,2), 4\right), \left((1,4)(2,3), 2\right)\right]
+\]
+}
+
+\section{Computing with the Unit Group}
+Exercise 13 concerns the unit group $U(n)$, for
+$2\leq n \leq 20$.  With a few lines of Python, we can compute, for each
+$2\leq n \leq 20$, those elements in $\{0, 1, 2, \dots, n-1\}$ that are
+relatively prime to $n$.
+(As remarked above, these are precisely the elements of $U(n)$.) 
+
+{\small
+\begin{verbatim}
+for k in range(2,21):
+    print "U("+str(k)+"):",
+    order=0
+    for j in range(k):
+        if (gcd(j,k)==1):
+            order = order + 1
+            print j, ",",
+    print " |U(" + str(k) + ")| =", order, "\n"
+\end{verbatim}
+}
+\medskip
+\noindent This produces the following output:
+{\footnotesize
+\begin{verbatim}
+    U(2): 1,  |U(2)| = 1 
+    U(3): 1, 2,  |U(3)| = 2 
+    U(4): 1, 3,  |U(4)| = 2 
+    U(5): 1, 2, 3, 4,  |U(5)| = 4 
+    U(6): 1, 5,  |U(6)| = 2 
+    U(7): 1, 2, 3, 4, 5, 6,  |U(7)| = 6 
+    U(8): 1, 3, 5, 7,  |U(8)| = 4 
+    U(9): 1, 2, 4, 5, 7, 8,  |U(9)| = 6 
+    U(10): 1, 3, 7, 9,  |U(10)| = 4 
+    U(11): 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,  |U(11)| = 10 
+    U(12): 1, 5, 7, 11,  |U(12)| = 4 
+    U(13): 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,  |U(13)| = 12 
+    U(14): 1, 3, 5, 9, 11, 13,  |U(14)| = 6 
+    U(15): 1, 2, 4, 7, 8, 11, 13, 14,  |U(15)| = 8 
+    U(16): 1, 3, 5, 7, 9, 11, 13, 15,  |U(16)| = 8 
+    U(17): 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,  |U(17)| = 16 
+    U(18): 1, 5, 7, 11, 13, 17,  |U(18)| = 6 
+    U(19): 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,  |U(19)| = 18 
+    U(20): 1, 3, 7, 9, 11, 13, 17, 19,  |U(20)| = 8 
+\end{verbatim}
+}
+
+We may also use GAP commands to find the ``structure description'' of the group
+$U(n)$, as follows:
+
+{\small
+\begin{verbatim}
+%gap
+for k in [2..20] do
+    G:= Units(Integers mod k); 
+    Print("U(",k,"): ", StructureDescription(G), "\n"); 
+od;
+\end{verbatim}
+}
+\noindent The output is:
+
+{\footnotesize
+\begin{verbatim}
+    U(2): 1
+    U(3): C2
+    U(4): C2
+    U(5): C4
+    U(6): C2
+    U(7): C6
+    U(8): C2 x C2
+    U(9): C6
+    U(10): C4
+    U(11): C10
+    U(12): C2 x C2
+    U(13): C12
+    U(14): C6
+    U(15): C4 x C2
+    U(16): C4 x C2
+    U(17): C16
+    U(18): C6
+    U(19): C18
+    U(20): C4 x C2
+\end{verbatim}
+}
+\noindent (Here {\tt C2} denotes the 2-element cyclic group, and {\tt C2 x C2}
+is the direct product of {\tt C2} with itself.)
+
+\end{document}

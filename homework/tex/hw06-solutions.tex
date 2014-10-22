@@ -1,0 +1,303 @@
+\documentclass[12pt,reqno]{amsart}
+\usepackage[top=2cm, left=2cm,right=2cm,bottom=2cm]{geometry}
+\renewcommand{\baselinestretch}{1.2}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{color,hyperref,enumerate,multicol}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.3}
+\hypersetup{colorlinks,breaklinks,
+            linkcolor=darkblue,urlcolor=darkblue,
+            anchorcolor=darkblue,citecolor=darkblue}
+            
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\pagestyle{empty}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\meet}{\ensuremath{\wedge}}
+\newcommand{\Meet}{\ensuremath{\bigwedge}}
+\newcommand{\join}{\ensuremath{\vee}}
+\renewcommand{\emptyset}{\ensuremath{\varnothing}}
+\renewcommand{\subset}{\ensuremath{\subsetneq}}
+\newcommand{\boldemph}{\emph}
+\newcommand{\lcm}{\ensuremath{\operatorname{lcm}}}
+\newcommand{\<}{\ensuremath{\langle}}
+\renewcommand{\>}{\ensuremath{\rangle}}
+
+\newcommand{\probskip}{\vskip8cm}
+
+\begin{document}
+\thispagestyle{empty}
+
+\noindent \textbf{Math 301} \hskip5cm {\bf Homework 6} \hfill {\bf Fall 2014}
+\vskip1cm
+\noindent {\bf Chapter 5:}   1bd, 3bd, 4, 6, 17, 18, 27.\\  
+   Additional suggested exercises: 29, 31, 32, 33.  \\
+{\bf Due date:} Friday, 10/10
+
+\medskip
+
+\noindent (Exercise numbers correspond to the printed textbook, generated from 2013/08/16 source files.)
+
+\medskip
+
+\begin{enumerate}[{\bf 1.}]
+
+%% 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item %1
+Write the following permutations in cycle notation.
+\begin{multicols}{2}
+\begin{enumerate}
+\item[(b)]
+\[
+\begin{pmatrix}
+1 & 2 & 3 & 4 & 5 \\
+4 & 2 & 5 & 1 & 3
+\end{pmatrix}
+\]
+\item[(d)]
+\[
+\begin{pmatrix}
+1 & 2 & 3 & 4 & 5 \\
+1 & 4 & 3 & 2 & 5
+\end{pmatrix}
+\]
+
+\end{enumerate}
+\end{multicols}
+
+\bigskip
+
+\noindent {\bf Solution:} (b) $(14)(35)$\hskip1cm (d) $(24)$
+\vskip1cm
+
+%% \begin{multicols}{2}
+%% \begin{enumerate}
+%% \item[(b)]
+%% \[
+%% \begin{pmatrix}
+%% 1 & 2 & 3 & 4 & 5 \\
+%% 4 & 2 & 5 & 1 & 3
+%% \end{pmatrix} = 
+%% $(14)(35)$
+
+%% \item[(d)]
+%% \[
+%% \begin{pmatrix}
+%% 1 & 2 & 3 & 4 & 5 \\
+%% 1 & 4 & 3 & 2 & 5
+%% \end{pmatrix} = 
+%% $(24)$
+%% %% \]
+%% \end{enumerate}
+
+%% \end{multicols}
+%% 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item[{\bf 3.}] 
+Express the following permutations as products of transpositions;
+identify them as even or odd. 
+
+\bigskip
+
+\begin{multicols}{2}
+\begin{enumerate}
+ \item[(b)]
+$(156)(234)$
+\vskip1cm
+ \item[(d)]
+$(17254)(1423)(154632)$
+\end{enumerate}
+\end{multicols}
+
+\bigskip
+\noindent {\bf Solution:}
+\begin{multicols}{2}
+\begin{enumerate}
+ \item[(b)]
+$(16)(15)(24)(23)$ is even.
+\vskip1cm
+ \item[(d)]
+$(14)(15)(12)(17)(13)(12)(14)(12)(13)(16)(14)(15)$
+ is even.
+\end{enumerate}
+\end{multicols}
+
+\bigskip
+ 
+%% 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item[{\bf 4.}] 
+Find $(a_1, a_2, \ldots, a_n)^{-1}$.
+
+\bigskip
+\noindent {\bf Solution:} We will verify that the permutation
+$f= (a_1, a_2, \ldots, a_n) (a_n, a_{n-1}, \ldots, a_1)$ 
+is the identity map $f(x) = x$, and thus the inverse
+of $(a_1, a_2, \ldots, a_n)$ is  $(a_n, a_{n-1}, \ldots, a_1)$.
+Indeed, if $x$ is not in the set $\{a_1, \dots,a_n\}$, 
+then clearly $f(x) = x$.  If $x$ is in the set
+ $\{a_1, \dots,a_n\}$, say $x = a_j$, then 
+\begin{align*}
+f(x) = f(a_j) %% &=(a_1, a_2, \ldots, a_n) (a_n, a_{n-1}, \ldots, a_1)\, x\\
+ &=  (a_1, a_2, \ldots, a_n) (a_n, a_{n-1}, \ldots, a_1)\, a_j\\
+&=(a_1, a_2, \ldots, a_n) \,a_{j-1}\\
+&=a_j =  x
+\end{align*}
+
+\newpage
+ 
+%% 6 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item[{\bf 6.}] 
+Find all of the subgroups in $A_4$. What is the order of each
+subgroup? 
+ 
+\bigskip
+
+\noindent {\bf Solution:} 
+First recall that the 12 elements of $A_4$ are 
+\[
+\{e,(12)(34), (13)(24), (14)(23), (123), (132), (124), (142), (134),
+(143),(234), (243)\}.
+\]  
+With the exception of the (improper) subgroup $A_4$, and the Klein 4 subgroup
+\[
+V_4 = \{e, (12)(34), (13)(24), (14)(23)\} \quad \text{ (of order 4), }
+\]
+ the other eight
+subgroups are cyclic.  They are
+\begin{align*}
+  \<(123)\> &= \{e, (123), (132)\} \quad \text{(order 3)}\\
+  \<(124)\> &= \{e, (124), (142)\} \quad \text{(order 3)}\\
+  \<(134)\> &= \{e, (134), (143)\} \quad \text{(order 3)}\\
+  \<(234)\> &= \{e, (234), (243)\} \quad \text{(order 3)}\\
+  \<(12)(34))\> &= \{e, (12)(34)\} \quad \text{(order 2)}\\
+  \<(13)(24))\> &= \{e, (13)(24)\} \quad \text{(order 2)}\\
+  \<(14)(23))\> &= \{e, (14)(23)\} \quad \text{(order 2)}\\
+\<e\> &= \{e\}  \quad \text{(order 1)}\\
+\end{align*}
+
+\vskip1cm
+
+%% 17 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item[{\bf 17.}] 
+Prove that $S_n$ is nonabelian for $n \geq 3$.
+
+\bigskip
+
+\noindent {\bf Solution:} 
+Note that, for every $n\geq 3$, the permutations $(123)$ and $(12)$ belong to
+$S_n$.  Therefore, if we can show that these two elements do not commute, then
+we will have proved that $S_n$ is nonabelian when $n\geq 3$. Indeed, 
+\[
+(123)\cdot (12) = (13) \neq (23) = (12)\cdot(123).
+\]
+
+\bigskip
+ 
+%% 18 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item[{\bf 18.}] 
+Prove that $A_n$ is nonabelian for $n \geq 4$.
+\bigskip
+
+\noindent {\bf Solution:} 
+Note that, for every $n\geq 4$, the permutations $(123)$ and $(12)(34)$ belong to
+$A_n$.  Therefore, if we can show that these two elements do not commute, then
+we will have proved that $A_n$ is nonabelian when $n\geq 4$. Indeed, 
+\[
+(123)\cdot (12)(34) = (134) \neq (243) = (12)(34)\cdot(123).
+\]
+\newpage
+ 
+%% 27 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item[{\bf 27.}] 
+Let $G$ be a group and define a map $\lambda_g : G \rightarrow G$ by
+$\lambda_g(a) = g a$.  Prove that $\lambda_g$ is a permutation of $G$.
+\bigskip
+
+\noindent {\bf Solution:} We must show that 
+$\lambda_g$ is a bijection (i.e., a one-to-one and onto map).
+The map $\lambda_g$ is clearly one-to-one, since $\lambda_g(a) = \lambda_g(b)$
+means $ga = gb$, so $g^{-1}ga = g^{-1}gb$, so $a = b$.
+The map $\lambda_g$ is onto since, for any $x\in G$, we can find a $y \in G$
+with $\lambda_g(y) = x$.  Indeed, let $y = g^{-1}x$, which belongs to $G$. Then,
+$\lambda_g(y) =\lambda_g(g^{-1}x) = x$.
+
+\renewcommand{\probskip}{\vskip1cm}
+
+\probskip
+
+%   Additional suggested exercises: 29, 31, 32, 33.  \\
+\noindent {\bf Additional suggested exercises:} 29, 31, 32, 33.  
+\\
+
+\item[{\bf 29.}]  % 29
+Recall that the \boldemph{center}\index{Group!center of} of a group $G$ is
+\[
+Z(G) = \{ g \in G : \mbox{$gx = xg$ for all $x \in G$} \}.
+\]
+Find the center of $D_8$. What about the center of $D_{10}$? What is
+the center of $D_n$? 
+ 
+\probskip
+
+ 
+\item[{\bf 31.}]  % 31
+For $\alpha$ and $\beta$ in $S_n$, define $\alpha \sim \beta$ if there
+exists an $\sigma \in S_n$ such that 
+$\sigma \alpha \sigma^{-1} = \beta$.  Show that $\sim$ is an equivalence
+relation on $S_n$. 
+ 
+\probskip
+ 
+\item[{\bf 32.}]  % 32
+Let $\sigma \in S_X$. If $\sigma^n(x) = y$, we will say that 
+$x \sim y$. 
+\begin{enumerate}
+ 
+ \item
+Show that $\sim$ is an equivalence relation on $X$.
+ 
+ \item
+If $\sigma \in A_n$ and $\tau \in S_n$, show that 
+$\tau^{-1} \sigma \tau \in A_n$. 
+ 
+\item
+Define the \boldemph{orbit}\index{Orbit} of $x \in X$ under $\sigma \in S_X$ to
+be the set  
+\[
+{\mathcal O}_{x, \sigma} = \{ y : x \sim y  \}.
+\]
+Compute the orbits of $\alpha, \beta, \gamma$ where
+\begin{align*}
+\alpha & = (1254) \\
+\beta & = (123)(45)\\
+\gamma & = (13)(25).
+\end{align*}
+ 
+ \item
+If ${\mathcal O}_{x, \sigma} \cap {\mathcal O}_{y, \sigma} \neq \emptyset$,
+prove that ${\mathcal O}_{x, \sigma} = {\mathcal O}_{y, \sigma}$.  The orbits
+under a permutation $\sigma$ are the equivalence classes corresponding
+to the equivalence relation $\sim$.
+ 
+ 
+\item
+A subgroup $H$ of $S_X$ is \boldemph{
+transitive}\index{Subgroup!transitive} if for every $x, y \in X$, 
+there exists a $\sigma \in H$ such that $\sigma(x) =y$. Prove that
+$\langle \sigma \rangle$ is transitive if and only if 
+${\mathcal O}_{x, \sigma} = X$ for some $x \in X$. 
+ 
+ 
+\end{enumerate}
+ 
+\probskip
+ 
+\item[{\bf 33.}]  %33
+Let $\alpha \in S_n$ for $n \geq 3$. If $\alpha \beta = \beta \alpha$
+for all $\beta \in S_n$, prove that $\alpha$ must be the identity
+permutation; hence, the center of $S_n$ is the trivial subgroup. 
+ 
+ 
+\end{enumerate}
+\end{document}

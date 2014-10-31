@@ -1,0 +1,238 @@
+\documentclass[12pt,reqno]{amsart}
+\usepackage[top=2cm, left=2cm,right=2cm,bottom=2cm]{geometry}
+\renewcommand{\baselinestretch}{1.2}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{color,hyperref,enumerate,multicol}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.3}
+\hypersetup{colorlinks,breaklinks,
+            linkcolor=darkblue,urlcolor=darkblue,
+            anchorcolor=darkblue,citecolor=darkblue}
+            
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\pagestyle{empty}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\meet}{\ensuremath{\wedge}}
+\newcommand{\Meet}{\ensuremath{\bigwedge}}
+\newcommand{\join}{\ensuremath{\vee}}
+\renewcommand{\emptyset}{\ensuremath{\varnothing}}
+\renewcommand{\subset}{\ensuremath{\subsetneq}}
+\newcommand{\boldemph}{\emph}
+\newcommand{\lcm}{\ensuremath{\operatorname{lcm}}}
+\newcommand{\lub}{\ensuremath{\operatorname{lub}}}
+\newcommand{\glb}{\ensuremath{\operatorname{glb}}}
+\newcommand{\Sub}{\ensuremath{\operatorname{Sub}}}
+\renewcommand{\>}{\ensuremath{\rangle}}
+\newcommand{\<}{\ensuremath{\langle}}
+
+\newcommand{\probskip}{\vskip1cm}
+
+\begin{document}
+\thispagestyle{empty}
+
+\noindent \textbf{Math 301} \hskip4cm {\bf Homework 7 -- Solutions} \hfill {\bf Fall 2014}
+\vskip1cm
+\noindent {\bf Exercises:} 1, 2 (below) and Judson 19.3, 19.14, 19.20.\\
+{\bf Due date:} Wednesday, 10/22
+
+\bigskip
+
+\begin{enumerate}[{\bf 1.}]
+
+%% 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item %1
+Let $P$ with $\leq$ be a partially ordered set, let $S \subseteq P$ and let
+$u\in P$.  We say that $u$ is an \emph{upper bound} for $S$ iff $s\leq u$ for
+all $s \in S$.  We say $\ell$ is the \emph{least upper bound} of $S$ iff $\ell$
+is an upper bound of $S$ and $\ell \leq u$ for every upper bound $u$ of $S$.
+Prove that if $\ell$ is the least upper bound of the set $\{x, y\}$ and $m$ is
+the least upper bound of the set $\{\ell, z\}$, then $m$ is the least upper
+bound of the set $\{x, y, z\}$.
+
+\bigskip
+\noindent
+{\bf Solution:}
+Since $\ell = \lub \{x, y\}$ and $m= \lub \{\ell, z\}$, we have 
+\[
+x\leq \ell, \qquad y \leq \ell  \quad  \text{ and } \quad \ell \leq m, \qquad z \leq m.
+\]
+Therefore, $x\leq \ell \leq m$, so $x\leq m$, by transitivity of $\leq$.
+Similarly, $y\leq \ell \leq m$, so
+transitivity implies $y\leq m$.  It follows that $m$ is an upper bound of the set
+$\{x, y, z\}$.  We want to show that $m$ is the \emph{least} upper bound of 
+$\{x, y, z\}$. That is, if $n$ is another upper bound of 
+$\{x, y, z\}$, we must show $m\leq n$.
+
+If $n$ is an upper bound of $\{x, y, z\}$, then it is also an upper bound of
+$\{x, y\}$, and since $\ell$ is the least upper bound of $\{x,y\}$, we have
+$\ell \leq n$.  Therefore, $n$ is an upper bound of $\{\ell, z\}$. Since $m$ is
+the least upper bound of $\{\ell, z\}$, we have $m\leq n$.
+\qed
+
+\probskip
+
+%% 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item
+Let $(P, \leq)$ be a partially ordered set with the property that every pair of
+elements $x, y \in P$ has a greatest lower bound. For $x, y\in P$, define 
+$x \cdot y = \operatorname{glb}(x,y)$. Prove that $(P, \cdot)$ is a semilattice.
+
+%% Let S with · be a semilattice. For x, y ∈ S we say x ≤ y iff x · y = y. Prove that ≤ is a partial ordering on S. Also prove that x · y is the least upper bound of the set {x, y}.
+
+\bigskip
+\noindent
+{\bf Solution:}
+Recall, a \emph{semilattice} is a commutative idempotent semigroup, so we must
+check that $\<P, \cdot\>$ has these three properties.
+\begin{enumerate}[(i)]
+\item To show $\<P, \cdot\>$ is a semigroup, we must prove that $\cdot$ is
+  associative. Indeed, for all $x, y, z\in P$, we have
+  \begin{align*}
+    x\cdot (y \cdot z) &= \glb\{x, \glb\{y, z\}\}\\
+    &= \glb\{x, y, z\} \qquad \qquad \text{(by Problem 1)}\\
+    &= \glb\{\glb\{x,y\}, z\} \quad \quad \text{(by Problem 1)}\\
+    &= (x\cdot y) \cdot z.
+  \end{align*}
+
+\item To prove $\cdot$ is commutative, note that the set $\{x,y\}$ is the same
+  as the set $\{y,x\}$, so $x\cdot y = \glb\{x,y\} =\glb\{y,x\} = y\cdot x$.
+
+\item Recall the following definition from lecture: an operation 
+  $f: A^n \rightarrow A$ is called \emph{idempotent} if it satisfies 
+  $f(a, \dots, a)  = a$ for all $a\in A$.  
+  Thus, to say that $\cdot$ is an idempotent operation is to say that
+  $a\cdot a = a$, for all $a\in P$. Indeed, $a\cdot a = \glb\{a, a\} = a$. 
+\end{enumerate}
+
+\probskip
+ 
+%% 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item[{\bf 19.3.}] 
+Draw a diagram of the lattice of subgroups of ${\mathbb Z}_{12}$.
+ 
+ 
+\bigskip
+\noindent
+{\bf Solution:}
+How one determines that the diagram shown below represents the lattice of
+subgroups of $\Z_{12}$ was explained in lecture.  
+If it is not clear to you, please attend office hours, or post a question on
+the class wiki, or email the instructor, or ask about it in lecture.
+\begin{center}
+\begin{tikzpicture}[scale=0.75]
+  \node (1) at (0,0) {$\langle e \rangle$}; 
+  \node (6) at (2,2) {$\langle 6 \rangle$}; 
+  \node (4) at (-2,2) {$\langle 4 \rangle$}; 
+  \node (2) at (0,4) {$\langle 2 \rangle$}; 
+  \node (3) at (4,4) {$\langle 3 \rangle$}; 
+  \node (G) at (2,6) {$\Z_{12}$}; 
+
+  \draw (1) to (6) to (2) to (4) to (1);
+  \draw (6) to (3) to (G) to (2) to (4);
+
+\end{tikzpicture}
+\end{center}
+
+\probskip
+
+%% 14 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item[{\bf 19.14.}] 
+Let $G$ be a group and $X$ be the set of subgroups of $G$ ordered by
+set-theoretic inclusion. If $H$ and $K$ are subgroups of $G$, show
+that the least upper bound of $H$ and $K$ is the subgroup generated by
+$H \cup K$. 
+ 
+\bigskip
+\noindent
+{\bf Solution:} This question is about the poset $\< \Sub(G), \leq\>$, where the
+universe is the set $\Sub(G)$ of all subgroups of $G$, and the partial order is
+the relation $\leq$ defined as follows: 
+\[
+H \leq K \qquad \Longleftrightarrow \qquad \text{$H$ is a subgroup of $K$.}
+\]  
+
+Let $X$ denote the least upper
+bound of $H$ and $K$ in $\< \Sub(G), \leq\>$. Then, since $X$ belongs to
+$\Sub(G)$, it is a subgroup of $G$, and since $X$  is an upper bound of $H$
+and of $K$, we have $H\leq X$ and $K \leq X$.  Therefore, all elements of 
+$H\cup K$ are contained in $X$.  Let $Y$ be any other subgroup of $G$
+that contains $H \cup K$, then $H\leq Y$ and $K \leq Y$. Since $X$ is the
+\emph{least} upper bound of $H$ and $K$, we have $X \leq Y$.  What we have shown
+is that $X$ is the smallest subgroup of $G$ that contains the set $H\cup K$.
+This is the definition of \emph{the subgroup of $G$ generated by} $H\cup K$.
+\qed
+\probskip
+ 
+%% 20 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item[{\bf 19.20.}] 
+Let $X$ and $Y$ be posets.  A map $\phi : X \rightarrow Y$ is \boldemph{
+order-preserving} if $a \preceq b$
+implies that $\phi(a) \preceq \phi(b)$.  Let $L$ and $M$ be lattices.
+A map $\psi: L \rightarrow M$ is a \boldemph{lattice
+homomorphism}
+if $\psi( a \vee b ) = \psi(a) \vee \psi(b)$ and $\psi( a \wedge b ) =
+\psi(a) \wedge \psi(b)$. Show that every lattice homomorphism is
+order-preserving, but that it is not the case that every
+order-preserving map is a lattice homomorphism.  
+ 
+\bigskip
+\noindent
+{\bf Solution:}
+Let $\psi: L \rightarrow M$ be a lattice homomorphism.  We must show that $\psi$
+is order preserving.  Let $a, b\in L$ be such that $a\leq b$.  As we learned in
+lecture, if $a$ and $b$ have a greatest lower bound (as they must in a lattice),
+then the statement $a\leq b$ is equivalent to $a\meet b = a$. Therefore,  
+\begin{equation*}
+%  \label{eq:1}
+\psi(a) = \psi(a \meet b)  = \psi(a) \meet \psi(b).
+\end{equation*}
+(The second equality holds since $\psi$ is a lattice homomorphism.)
+As mentioned, the equation $\psi(a) = \psi(a) \meet \psi(b)$ 
+is equivalent to $\psi(a) \leq \psi(b)$.  We have thus proved that if $\psi$ is
+a lattice homomorphism and if $a\leq b$, then $\psi(a) \leq \psi(b)$.  That is,
+lattice homomorphisms are order preserving.
+
+The converse is false.  That is, an order preserving map need not be a lattice
+homomorphism. For example, consider the two lattice diagrams in the figure
+below.  The map 
+\[
+\phi: \{0, 1, 2, 3\} \rightarrow \{a, b, c\} \quad \text{ defined by }
+\]
+\[
+\phi(0) = a, \quad \phi(2) = b = \phi(3), \quad \phi(1) = c
+\]
+is clearly order preserving, but it is not a lattice homomorphism.  For example, 
+\[
+a = \phi(0) = \phi(2 \meet 3) \neq \phi(2) \meet \phi(3)  = b \meet b = b.
+\]
+
+\vskip5mm
+
+\begin{center}
+  
+\begin{tikzpicture}[scale=0.7]
+  \node (0) at (0,0) [draw, inner sep=1pt] {};
+  \node (1) at (1.5,2)[draw,circle,inner sep=1pt] {}; 
+  \node (2) at (-1.5,2) [draw,circle,inner sep=1pt] {};
+  \node (3) at (0,4) [draw,circle,inner sep=1pt] {};
+  \node (a) at (4,0) [draw,circle,inner sep=1pt] {};
+  \node (b) at (4,2) [draw,circle,inner sep=1pt] {};
+  \node (c) at (4,4) [draw,circle,inner sep=1pt] {};
+  \draw (a) to (b) to (c);
+  \draw (0) to (1) to (3) to (2) to (0);
+
+  \draw (0) node [below] {$0$};
+  \draw (2) node [left] {$2$};
+  \draw (1) node [right] {$3$};
+  \draw (3) node [above] {$1$};
+  \draw (a) node [right] {$a$};
+  \draw (b) node [right] {$b$};
+  \draw (c) node [right] {$c$};
+\end{tikzpicture}
+\end{center}
+\end{enumerate}
+\end{document}

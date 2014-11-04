@@ -8,9 +8,6 @@
 \hypersetup{colorlinks,breaklinks,
             linkcolor=darkblue,urlcolor=darkblue,
             anchorcolor=darkblue,citecolor=darkblue}
-            
-\usepackage{algorithm}
-\usepackage{algorithmic}
 \pagestyle{empty}
 \newcommand{\N}{\ensuremath{\mathbb{N}}}
 \newcommand{\Z}{\ensuremath{\mathbb{Z}}}
@@ -23,6 +20,25 @@
 \newcommand{\boldemph}{\emph}
 \newcommand{\lcm}{\operatorname{lcm}}
 
+%%% better divides symbol >>>>>>>>>
+\makeatletter
+\def\localbig#1#2{%
+  \sbox\z@{$#1
+    \sbox\tw@{$#1()$}%
+    \dimen@=\ht\tw@\advance\dimen@\dp\tw@
+    \nulldelimiterspace\z@\left#2\vcenter to1.2\dimen@{}\right.
+  $}\box\z@}
+\makeatletter
+\newcommand{\divides}{\mathrel{\mathpalette\dividesaux\relax}}
+\newcommand{\ndivides}{\mathrel{\mathpalette\ndividesaux\relax}}
+\newcommand{\dividesaux}[2]{\mbox{$#1\localbig{#1}|$}}
+\newcommand{\ndividesaux}[2]{%
+  \mkern.5mu\ooalign{\hidewidth$#1\localbig{#1}|$\hidewidth\cr$#1\nmid$\cr}}
+%%% <<<<<<<<<< better divides symbol
+
+\newcommand{\<}{\ensuremath{\langle}}
+\renewcommand{\>}{\ensuremath{\rangle}}
+
 \newcommand{\probskip}{\vskip1cm}
 
 \begin{document}
@@ -34,6 +50,7 @@
 {\bf Due date:} Friday, 10/24
 
 \bigskip
+
 
 \begin{enumerate}[{\bf 1.}]
 
@@ -56,11 +73,30 @@ Every subgroup of the integers has finite index.
 Every subgroup of the integers has finite order.
 \end{enumerate}
 
+\medskip
+
 \noindent {\bf Solution:} 
 \begin{enumerate}
-\item False.  By Lagrange's Theorem, $|\<g\>| \divides |G|$ and $|g| = |\<g\>|$
-  and $3 \notmid 8$.
-\item True.  If $H\leq G$ then $|H| \divides |G|$
+\item False.  Note that $|g| = |\<g\>|$, and by Lagrange's Theorem $|\<g\>|$
+  divides $|G|$.  So the order of every element of a group must divide the
+  order of the group. Since $3 \ndivides 8$, there is no element of order 3 in a
+  group of order 8.
+\medskip
+\item True.  If $H, K \leq G$ then $|H| \divides |G|$ and
+$|K| \divides |G|$, by Lagrange's Theorem. 
+In case $|H| = 2$ and $|K| = 3$, we have
+$2\divides |G|$ and $3\divides |G|$, 
+so $|G| \geq \lcm(2,3) = 6$.
+\medskip
+\item
+False. The subgroup $ \{0\} \leq \Z$ has infinite index, 
+$[\Z : \{0\}] = \infty$. The cosets of $\{0\}$ in $\Z$ have the form
+$k+\{0\} = \{k\}$, where $k\in \Z$.  That is,  for each $k\in \Z$, the set $\{k\}$ is the coset
+of $\{0\}$ containing $k$.
+%$\{0\}, 1+\{0\}, 2+\{0\}, \dots, , \dots$.
+\medskip
+\item
+False. The subgroup $H = 2\Z \leq \Z$ has infinite order.
 \end{enumerate}
 \probskip
 
@@ -74,8 +110,28 @@ $G = U(8)$, $H = \langle 3 \rangle$.
 $G = S_4$, $H = A_4$.
 \end{enumerate}
 
-\probskip
+\medskip
 
+\noindent {\bf Solution:} 
+\begin{enumerate}
+\item[{\bf b.}]
+If $G = U(8) = \{1, 3, 5, 7\}$ and $H = \langle 3 \rangle = \{1, 3\}$, then
+there are $[G:H] = |G|/|H| = 4/2 = 2$ cosets, namely, $H = \{1,3\}$ and 
+$5H = \{5, 7\}$. That is, 
+\[
+G/H =  %% U(8)/\<3\> = 
+\{gH : g\in G\} = \{ H, 5H\} = \{\{1,3\}, \{5, 7\}\}.
+\]
+\item[{\bf c.}] 
+If $G = S_4$ and $H = A_4$, then there are $[G:H] = |G|/|H| = 4!/(4!/2) = 2$
+cosets, namely, $A_4$ and $gA_4$, where $g$ is any element of $S_4$ that does
+not belong to $A_4$. (For example, let $g = (12)$, which is odd.)
+That is, $G/H %% = S_4/A_4 
+= \{gH : g\in G\} = \{ A_4, (12)A_4\}$.
+
+\end{enumerate}
+
+\newpage
 %% 11 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item[{\bf 6.11.}] 
 Let $H$ be a subgroup of a group $G$ and suppose that $g_1, g_2 \in G$.  Prove
@@ -92,19 +148,63 @@ $g_2 \in g_1 H$
 $g_1^{-1} g_2 \in H$
 \end{enumerate}
 
+\medskip
+
+\noindent {\bf Solution:} 
+This was proved in class.  Please come to office hours if you don't understand it.
+
 \probskip
+
+
  
 %% 16 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item[{\bf 6.16.}] 
 If $|G| = 2n$, prove that the number of elements of order 2 is odd.  Use this
 result to show that $G$ must contain a subgroup of order 2. 
 
+\medskip
+
+\noindent {\bf Solution:} 
+Suppose $|G| = 2n$.  Let 
+\[
+X = \{x\in G | x^2 =e\} = \{x\in G | x =x^{-1}\},
+\]
+\[
+X^c = \{x\in G | x^2 \neq e\} = \{x\in G | x \neq x^{-1}\}.
+\]
+Then $G$ is the disjoint union $G = X \coprod X^c$, so
+\begin{equation}
+|G| = |X| + |X^c|.
+\label{eq:1}
+\end{equation}
+Note that $X$ includes the identity element, 
+which has order 1, so $X \setminus \{e\}$ is the set of all elements of
+$G$ of order~2. There are $|X|-1$ such elements, so the goal is to show that
+$|X| -1$ is odd, or, equivalently, that $|X|$ is even.
+Now, $|X^c|$ is clearly even since, for each $x \in X^c$, there is a corresponding element
+$x^{-1}$ (distinct from $x$) that also belongs to $X^c$.
+%%  (since $(x^{-1})^{-1} = x$, so $x^{-1} \neq (x^{-1})^{-1}$)
+That is, elements of $X^c$ come in pairs.  Therefore, $|X^c|=2k$ for some $k$,
+so by~(\ref{eq:1}),
+\[
+|X| = |G| - |X^c| = 2n - 2k = 2(n-k),
+\]
+which is an even number.
+\qed
 \probskip
+
 
 %% 18 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item[{\bf 6.18.}] 
 If $[G : H] = 2$, prove that $gH = Hg$.
 
+\noindent {\bf Solution:} 
+If $g \in H$, then $gH = H = Hg$ and we are done.  So assume $g \notin H$.  
+Then $H\neq gH$.  Since $[G : H] = 2$, there are exactly two left cosets of $H$
+in $G$, namely  $H$ and $gH$.
+Similarly, there are two right cosets of $H$ in $G$, namely $H$ and $Hg$.  
+Since $G$ is the disjoint union of $H$ and $Hg$, and also the disjoint union of
+$H$ and $gH$, we have $gH = Hg$.
 \end{enumerate}
 \end{document}
 

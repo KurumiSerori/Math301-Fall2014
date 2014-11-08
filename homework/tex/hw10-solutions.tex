@@ -1,0 +1,344 @@
+\documentclass[12pt,reqno]{amsart}
+\usepackage[top=2cm, left=2cm,right=2cm,bottom=2cm]{geometry}
+\renewcommand{\baselinestretch}{1.2}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{scalefnt}
+\usepackage{tikz}
+\usepackage{color,hyperref,enumerate,multicol}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.3}
+\hypersetup{colorlinks,breaklinks,
+            linkcolor=darkblue,urlcolor=darkblue,
+            anchorcolor=darkblue,citecolor=darkblue}
+            
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\pagestyle{empty}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\bL}{\ensuremath{\mathbf{L}}}
+\newcommand{\bP}{\ensuremath{\mathbf{P}}}
+\newcommand{\bQ}{\ensuremath{\mathbf{Q}}}
+\newcommand{\bA}{\ensuremath{\mathbf{A}}}
+\newcommand{\bB}{\ensuremath{\mathbf{B}}}
+\newcommand{\bG}{\ensuremath{\mathbf{G}}}
+\newcommand{\bH}{\ensuremath{\mathbf{H}}}
+\newcommand{\invG}{\ensuremath{\operatorname{inv}^{\bG}}}
+\newcommand{\invH}{\ensuremath{\operatorname{inv}^{\bH}}}
+\newcommand{\meet}{\ensuremath{\wedge}}
+\newcommand{\Meet}{\ensuremath{\bigwedge}}
+\newcommand{\<}{\ensuremath{\langle}}
+\renewcommand{\>}{\ensuremath{\rangle}}
+\newcommand{\join}{\ensuremath{\vee}}
+\renewcommand{\emptyset}{\ensuremath{\varnothing}}
+\renewcommand{\subset}{\ensuremath{\subsetneq}}
+\newcommand{\boldemph}{\emph}
+\newcommand{\lcm}{\ensuremath{\operatorname{lcm}}}
+\newcommand{\Sym}{\ensuremath{\operatorname{Sym}}}
+%\newcommand{\bG}{\ensuremath{\mathbf{G}}}
+
+\newcommand{\probskip}{\vskip1cm}
+
+\begin{document}
+\thispagestyle{empty}
+
+\noindent \textbf{Math 301} \hskip5cm {\bf Homework 10} \hfill {\bf Fall 2014}
+\vskip1cm
+\noindent {\bf Exercises:} Judson 10.1abe, 10.5, 10.10, 10.11, 10.13acd, and
+Problem 6 below.\\
+{\bf Due date:} Wednesday, 11/05
+
+\bigskip
+\begin{enumerate}
+%% 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item[{\bf 10.1}] For each of the following groups $G$, determine whether $H$ is a normal
+subgroup of $G$. If $H$ is a normal subgroup, write out a Cayley table
+for the factor group $G/H$.
+\begin{enumerate}
+\item[(a)]
+$G = S_4$ and $H = A_4$
+ \item[(b)]
+$G = A_5$ and $H = \{ (1), (123), (132) \}$
+%%  \item
+%% $G = S_4$ and $H = D_4$
+%%  \item
+%% $G = Q_8$ and $H = \{ 1, -1, I, -I \}$
+\item[(e)]
+
+$G = {\mathbb Z}$ and $H = 5 {\mathbb Z}$
+ 
+\end{enumerate}
+
+\medskip
+\noindent {\bf Solution:} 
+\begin{enumerate}
+\item[(a)]
+The subgroup $H = A_4$ has index $[S_4: A_4] = 2$.  Therefore, by Exercise 10.10
+(below), $A_4$ is normal in $S_4$.  The elements of the factor group, that is,
+the cosets of $A_4$ in $S_4$, are $\{A_4, gA_4\}$, where $g$ is any element of
+$S_4$ that is not contained in $A_4$.  For example, $g = (23)$ works.  
+
+Recall that, for a normal subgroup $N\triangleleft G$, coset
+multiplication is defined by
+$g_1N * g_2N = (g_1\cdot g_2) N$, where $g_1\cdot g_2$ is the product in $G$.
+So one acceptable representation of the Cayley table of $S_4/A_4$ is
+
+\medskip
+\begin{center}
+\begin{tabular}{r|rr}
+  $*$ & $A_4$ &$(23)A_4$ \\
+\hline
+  $A_4$ & $A_4$ &$(23)A_4$ \\
+  $(23)A_4$ & $(23)A_4$ &$A_4$
+\end{tabular}
+\end{center}
+\medskip
+
+An acceptable alternative is
+\medskip
+%% \begin{multicols}{3}
+%% \end{multicols}
+\begin{center}
+\begin{tabular}{r|rr}
+  $*$ & $A_4$ &$(12)A_4$ \\
+\hline
+  $A_4$ & $A_4$ &$(12)A_4$ \\
+  $(12)A_4$ & $(12)A_4$ &$A_4$
+\end{tabular}
+\hskip1cm or even \hskip1cm
+\begin{tabular}{r|rr}
+  $*$ & $(123)A_4$ &$(34)A_4$ \\
+\hline
+  $(123)A_4$ & $(123)A_4$ &$(34)A_4$ \\
+  $(34)A_4$ & $(34)A_4$ &$(123)A_4$
+\end{tabular}
+\end{center}
+\medskip
+or any other table involving two cosets $g_0A_4$ and $g_1A_4$, where
+$g_0\in A_4$, so $g_0A_4 = A_4$ is the identity element, and 
+$g\in S_4 - A_4$, so $g_1A_4 \neq A_4$ is the nonidentity element.
+
+Note that $(123) \in A_4$ since it can be written as $(123) = (13)(12)$, which
+is a product of an \emph{even} number of transpositions.  Therefore, $(123)A_4 = A_4$. For
+this reason, we could have use $(123)A_4$ to represent the identity element of
+the factor group.  Of course, we cannot use $(123)A_4$ as the nonidentity element,
+so the following table would be incorrect:
+\medskip
+\begin{center}
+\begin{tabular}{r|rr}
+  $*$ & $A_4$ &$(123)A_4$ \\
+\hline
+  $A_4$ & $A_4$ & $(123)A_4$ \\
+  $(123)A_4$ & $(123)A_4$ &$A_4$
+\end{tabular}
+\hskip1cm $\longleftarrow$ (not the Cayley table of $S_4/A_4$)
+\end{center}
+
+\newpage
+
+ \item[(b)]
+The subgroup $H = \{ (1), (123), (132) \}$ is not normal in $G = A_5$, as we
+will show using\\[4pt] 
+\indent {\bf a standard way to prove a subgroup $H$ is not normal in
+  $G$:}
+\medskip
+\begin{quote}
+\emph{find elements $g\in G$ and $h\in H$ such that $ghg^{-1} \notin H$.}
+\end{quote}
+\medskip
+
+In the present example, if we let $g = (234) \in A_5$ and $h = (123) \in H$,
+then 
+\[
+ghg^{-1}  = (234)(123)(243) = (234)(124) = (134) \notin H.
+\]
+\item[(e)]
+Certainly $H = 5 {\mathbb Z}$ is normal in $G = {\mathbb Z}$, since $G$ is
+abelian (so every subgroup of $G$ is normal).  The elements of the factor group
+are the cosets of $5\Z$ in $\Z$, and the Cayley table can be presented as follows:
+\medskip
+\begin{center}
+\begin{tabular}{r|rrrrr}
+  $+$ & $5\Z$ &$1+5\Z$&$2+5\Z$&$3+5\Z$&$4+5\Z$ \\
+\hline
+  $5\Z$ & $5\Z$ &$1+5\Z$&$2+5\Z$&$3+5\Z$&$4+5\Z$ \\
+  $1+5\Z$ &$1+5\Z$&$2+5\Z$&$3+5\Z$&$4+5\Z$& $5\Z$  \\
+  $2+5\Z$ &$2+5\Z$&$3+5\Z$&$4+5\Z$& $5\Z$&$1+5\Z$  \\
+  $3+5\Z$ &$3+5\Z$&$4+5\Z$& $5\Z$&$1+5\Z$&$2+5\Z$  \\
+  $4+5\Z$ &$4+5\Z$& $5\Z$&$1+5\Z$&$2+5\Z$&$3+5\Z$
+\end{tabular}
+\end{center}
+\medskip
+
+It is also acceptable to use the shorthand $[k]$ or $(k)$ for the coset of $5\Z$
+containing $k$, in which case, the Cayley table could be presented as follows:
+
+\medskip
+\begin{center}
+\begin{tabular}{r|rrrrr}
+  $+$ & $[0]$ &$[1] $&$[2] $&$[3] $&$[4] $ \\
+\hline
+  $[0]$ & $[0]$ &$[1] $&$[2] $&$[3] $&$[4] $ \\
+  $[1] $ &$[1] $&$[2] $&$[3] $&$[4] $& $[0]$  \\
+  $[2] $ &$[2] $&$[3] $&$[4] $& $[0]$&$[1] $  \\
+  $[3] $ &$[3] $&$[4] $& $[0]$&$[1] $&$[2] $  \\
+  $[4] $ &$[4] $& $[0]$&$[1] $&$[2] $&$[3] $
+\end{tabular}
+\end{center}
+\medskip
+which looks an awful lot like the group of integers with addition modulo 5 that
+we encountered earlier, and called $\Z_5$.  In fact,  the group 
+$\Z_5$, whose universe is the set of integers $\{0, 1, 2, 3, 4\}$ and whose
+binary operation is addition modulo 5 is isomorphic to the group $\Z/5\Z$.  
+While the elements of $\Z/5\Z$ are infinite sets of integers, the elements of $\Z_5$
+are just the five integers $\{0, 1, 2, 3, 4\}$.  Apart from this distinction, 
+the group structure is the same in each case, as we can see from the Cayley
+tables.
+
+ 
+\end{enumerate}
+
+\bigskip
+
+\item[{\bf 10.5.}]
+Show that the intersection of two normal subgroups is a normal
+subgroup. 
+ 
+\medskip
+\noindent {\bf Solution:} Let $H$ and $K$ be normal subgroups of a group $G$.
+We have proved in the past that the intersection $N = H\cap K$ of two subgroups
+is a subgroup.  We will now prove that $N$ is normal using\\[4pt]
+\indent {\bf a standard way to prove a subgroup $N$ is normal in $G$:}
+\medskip
+\begin{quote}
+\emph{Pick arbitrary elements $g\in G$ and $n\in N$ and show that $gng^{-1} \in N$.}
+\end{quote}
+\medskip
+Fix $g\in G$ and $n \in N = H\cap K$.  
+Since $n \in H$ and $H \triangleleft G$, we have $gng^{-1} \in H$.
+Since $n \in K$ and $K \triangleleft G$, we have $gng^{-1} \in K$.
+Therefore, $gng^{-1} \in H\cap K = N$.
+\qed
+\bigskip
+
+\item[{\bf 10.10.}]
+Let $H$ be a subgroup of index 2 of a group $G$. Prove that $H$ must
+be a normal subgroup of $G$. Conclude that $S_n$ is not simple for $n \geq 3$.
+
+\medskip
+\noindent {\bf Solution:} We will show that $[G:H]=2$ implies $H\triangleleft G$
+using\\[4pt]
+\indent {\bf another standard way to prove a subgroup $H$ is normal in $G$:}
+\medskip
+\begin{quote}
+\emph{Pick an arbitrary element $g\in G$ and show that $gH = Hg$.}
+\end{quote}
+\medskip
+If $[G:H]=2$, then there are two left cosets of $H$ in $G$.
+Fix $g \in G$. If $g \in H$, then $gH = Hg$ and there is nothing to prove.
+Assume $g \notin H$.  Then the two left cosets of $H$ in $G$, 
+are $H$ and $gH$. Recall that a full set of left cosets partitions the group as a
+\emph{disjoint} union $G = H \cup gH$.  Similarly, the two right cosets of $H$ in
+$G$ must be $H$ and $Hg$, and again we have a partition of $G$ as a into
+\emph{disjoint} union of sets $G = H \cup Hg$.  It follows that $gH = G-H = Hg$.
+\qed
+
+\bigskip
+
+\item[{\bf 10.11.}]
+If a group $G$ has exactly one subgroup $H$ of order $k$, prove that
+$H$ is normal in $G$. 
+
+\medskip
+\noindent {\bf Solution:} 
+We will solve this using\\[4pt]
+\indent {\bf another standard way to prove a subgroup $H$ is normal in $G$:}
+\medskip
+\begin{quote}
+\emph{Pick an arbitrary element $g\in G$ and show that $gHg^{-1} = H$.}
+\end{quote}
+\medskip
+First, given a subgroup $H\leq G$, and an arbitrary element $g\in G$, it is not hard to
+see that the \emph{conjugate of $H$ by $g$}, which is defined by
+\[
+gHg^{-1} := \{ghg^{-1} | h\in H\},
+\]
+is also a subgroup of $G$.  Moreover, the function $h \mapsto ghg^{-1}$ is a
+bijection.\footnote{In fact, as we will see later, $x\mapsto gxg^{-1}$ 
+is an automorphism.}  
+Therefore, $|H| = |gHg^{-1}|$.  If $|H| =k$ and if $H$ is the only
+subgroup of $G$ of order $k$, then, since $|gHg^{-1}| = k$, we must have 
+$H = gHg^{-1}$.
+Since $g$ was arbitrary, this proves that $H$ is normal in $G$.
+\qed
+
+\bigskip
+
+\item[{\bf 10.13.}]
+Recall that the {\bf center} of a group $G$ is the set 
+\[
+Z(G) = \{ x \in G : xg = gx \text{ for all $g \in G$ } \}.
+\]
+\begin{enumerate}
+ 
+ \item[(a)]
+Calculate the center of $S_3$.
+ 
+%%  \item
+%% Calculate the center of $GL_2 ( {\mathbb R} )$.
+ 
+ \item[(c)]
+Show that the center of any group $G$ is a normal subgroup of $G$. 
+ 
+ \item[(d)]
+If $G / Z(G)$ is cyclic, show that $G$ is abelian.\footnote{Hint: Let $Z := Z(G)$.  If
+  $G/Z$ is cyclic then there exists $x\in G$ such that for each $a\in G$ 
+  there exists $m\in \N$ such that $aZ = x^mZ$.
+  Fix $a, b\in G$ and show $ab = ba$ using the fact that $aZ = x^mZ$ and
+  $bZ = x^nZ$ for some $m$ and $n$.}
+ 
+\end{enumerate}
+\medskip
+\noindent {\bf Solution:} 
+ 
+\end{enumerate}
+
+\bigskip
+
+\noindent {\bf Problem 6.} Let $\bG = \<G, \cdot, ^{-1}, e\>$ be a finite group of order $n$.  
+Take the set $G$ (the elements of $\bG$) and consider the group of all
+permutations of these elements.  This group is sometimes denoted by $\Sym(G)$;
+note that it is isomorphic to the symmetric group $S_n$ of permutations of
+an $n$-element set.
+Now fix an element $a\in G$ and recall that the function
+$\lambda_a: G \rightarrow G$, defined by $\lambda_a(g) = a\cdot g$, is a
+permutation of the set $G$.  That is, $\lambda_a$ belongs to the
+permutation group $\Sym(G)$.
+
+
+\bigskip
+
+\begin{enumerate}[(a)]
+\item 
+Prove that the function $\lambda: G \rightarrow \Sym(G)$ is a group
+homomorphism.  
+
+\medskip
+
+\item What is the kernel of $\lambda$?\footnote{Recall that the kernel of a function $f: X \rightarrow Y$ is the subset of
+  $X\times X$ defined by 
+\[
+\ker f = \{(x_1,x_2) : f(x_1) = f(x_2)\}.
+\]
+As you have already proved, the kernel is an equivalence relation on $X$.}
+
+
+\medskip
+
+\item Let $N$ denote the equivalence class of $\ker\lambda$ that contains the
+  identity element $e$ of $G$.  Prove that $N$ is a normal subgroup of $G$.
+\end{enumerate}
+
+
+\end{document}

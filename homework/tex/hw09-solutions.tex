@@ -132,9 +132,12 @@ denotes the identity function on the set $X$: $\operatorname{id}_X(x) = x$.)
 We will be a little bit sloppy and rewrite the three conditions of our
 definition as follows:
 \begin{enumerate}[(1)]
-\item  $\varphi(x\cdot y) = \varphi(x) \circ \varphi(y)$,
-\item  $\varphi(x^{-1}) = [\varphi(x)]^{-1}$,
-\item  $\varphi(e^{\bG}) = e^{\bH}$.
+\item
+$\varphi(x\cdot y) = \varphi(x) \circ \varphi(y)$,
+\item 
+ $\varphi(x^{-1}) = [\varphi(x)]^{-1}$,
+\item 
+ $\varphi(e^{\bG}) = e^{\bH}$.
 \end{enumerate}
 since in each case the context makes clear whether we mean the operation in $\bG$ or
 in $\bH$.
@@ -142,31 +145,56 @@ in $\bH$.
 %% it's clear that~$\cdot$ denotes the binary operation on $\bG$ and $\circ$ is
 %% that on $\bH$.
 
-Assume (1) holds.
-  Then, for any $x\in G$, 
+\noindent
+[(1) $\Rightarrow$ (3)]
+
+%% \noindent
+%% \underline{First proof:}
+%% Assume (1) holds.
+%%   Then, for any $x\in G$, 
+%% \[
+%% \varphi(x)  = \varphi(e^{\bG}\cdot x)  =
+%% \varphi(e^{\bG})\circ \varphi(x) 
+%% \]
+%% and
+%% \[\varphi(x)  = \varphi(x\cdot e^{\bG})  =
+%% \varphi(x) \circ \varphi(e^{\bG}).
+%% \]
+%% Thus, for all elements $y\in H$ that happen to belong to the image of $G$ under
+%% $\varphi$, we have 
+%% \[
+%% \label{eqn:1}
+%% y\circ \varphi(e^{\bG}) = y = \varphi(e^{\bG}) \circ y.
+%% \]
+%% The image under $\varphi$ is nonempty, so there is at least one 
+%% $y\in \varphi(G) \subseteq H$, and this element satisfies~(\ref{eqn:1}), so
+%% \[
+%% e^{\bH} \circ y = y = \varphi(e^{\bG}) \circ y.
+%% \]
+%% Multiplying both sides of this identity on the right by $y^{-1}$, we
+%% have $e^{\bH}= \varphi(e^{\bG})$, so (3) holds.
+
+\noindent
+%% \underline{Alternative proof:} 
+By~(1),
 \[
-\varphi(x)  = \varphi(e^{\bG}\cdot x)  =
-\varphi(e^{\bG})\circ \varphi(x) 
+\varphi(e^{\bG}) = \varphi(e^{\bG} \cdot e^{\bG}) = \varphi(e^{\bG}) \circ
+\varphi(e^{\bG}).
 \]
-and
-\[\varphi(x)  = \varphi(x\cdot e^{\bG})  =
-\varphi(x) \circ \varphi(e^{\bG}).
-\]
-Thus, for all elements $y\in H$ that happen to belong to the image of $G$ under
-$\varphi$, we have 
+Multiplying on the right of both sides by $[\varphi(e^{\bG})]^{-1}$ yields
 \[
-\label{item:1}
-y\circ \varphi(e^{\bG}) = y = \varphi(e^{\bG}) \circ y.
+e^\bH = \varphi(e^{\bG}) \circ [\varphi(e^{\bG})]^{-1} =
+ \varphi(e^{\bG}) \circ \varphi(e^{\bG}) \circ [\varphi(e^{\bG})]^{-1}.
 \]
-The image under $\varphi$ is nonempty, so there is at least one 
-$y\in \varphi(G) \subseteq H$, which satisfies~(\ref{item:1}), and 
-for this $y$ we have
-\[
-e^{\bH} \circ y = y = \varphi(e^{\bG}) \circ y.
-\]
-Multiplying both sides of this identity on the right by $y^{-1}$, we
-have $e^{\bH}= \varphi(e^{\bG})$, so (3) holds.
-Now, assuming (1) and (3) hold, we have
+Equivalently, $e^\bH = \varphi(e^{\bG})$.
+
+\medskip
+
+\noindent
+[(1) and (3) $\Rightarrow$ (2)]
+
+\noindent
+Assuming (1) and (3) hold,
 \[
 e^{\bH} = \varphi(e^{\bG}) = 
 \varphi(x\cdot x^{-1}) = 
@@ -300,6 +328,7 @@ ordered while the one on the left is only partially ordered.
 %% \item[{\bf 9.7.}] 
 %% Show that any cyclic group of order $n$ is isomorphic to ${\mathbb Z}_n$. 
 
+\newpage
 
 \item[{\bf 9.22}]
 Let $G$ be a group of order 20. If $G$ has subgroups $H$ and $K$ of

@@ -415,5 +415,17 @@ Since $\phi$ is onto, there exists $x\in G_1$ such that $\phi(x) = y$.
 Therefore, $\psi\phi(x) = \psi(y) = z$, so 
 $\psi\circ\phi$ is onto.
 
+\medskip
+Finally, we must show that $\cong$ determines an equivalence relation on the
+class of all groups.
+\begin{enumerate}
+\item (reflexive) For every group $G$, we have $G \cong G$, since the identity
+  map, $x \mapsto x$, is easily seen to be an isomorphism.
+\item (symmetric) Assume $G \cong H$ and $\varphi: G \rightarrow H$ is an
+  isomorphism. Then, by what we proved above, $\varphi^{-1}: H \rightarrow G$ is an isomorphism, so $H\cong G$.
+\item (transitive) Assume $G \cong H$ and $H \cong K$.  We must show $G \cong K$. Let 
+  $\varphi: G \rightarrow H$ and $\psi: H \rightarrow K$ be isomorphisms. Then, by what we proved above
+ $\psi \circ \varphi: G \rightarrow K$ is an isomorphism so $G\cong K$.
+\end{enumerate}
 \end{enumerate}
 \end{document}

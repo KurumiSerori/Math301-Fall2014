@@ -6,7 +6,7 @@
 \usepackage{scalefnt}
 \usepackage{tikz}
 \usepackage{color,hyperref,enumerate,multicol}
-\definecolor{darkblue}{rgb}{0.0,0.0,0.3}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.4}
 \hypersetup{colorlinks,breaklinks,
             linkcolor=darkblue,urlcolor=darkblue,
             anchorcolor=darkblue,citecolor=darkblue}
@@ -299,8 +299,129 @@ If $G / Z(G)$ is cyclic, show that $G$ is abelian.\footnote{Hint: Let $Z := Z(G)
   $bZ = x^nZ$ for some $m$ and $n$.}
  
 \end{enumerate}
-\medskip
+
+\newpage
+
 \noindent {\bf Solution:} 
+\begin{enumerate}
+ \item[(a)]
+Recall the elements of $S_3$ are 
+$\{(~), (12), (13), (23), (123), (132)\}$.
+The center of a group consists of those elements that commute with
+every other element in the group. In case $G = S_3$, the center is trivial.
+That is, the only element of $S_3$ that commutes with every other element is the
+identity permutation $(~)$.  This can be proved by direct calculation. For each
+element $x \in S_3$, there is at least one $y\in S_3$ such that $xy \neq yx$: 
+\begin{align*}
+  (12)(13) = (132) % \\ & 
+  &\neq (123) = (13)(12)\\[4pt]
+  (23)(123) = (13) % \\ & 
+  &\neq (12) = (123)(23)\\[4pt]
+  (132)(13) = (12) % \\ & 
+  &\neq (23) = (13)(132)
+\end{align*}
+With the exception of the identity $(~)$, every element of $S_3$ appears at least
+one of the noncommuting products above.  Therefore, $Z(S_3) = \{(~)\}$.
+
+\medskip
+ 
+ \item[(c)]
+\emph{Claim:} The center of any group is normal: $Z(G) \triangleleft G$.
+
+\smallskip
+
+\noindent
+\emph{Proof 1:}
+We use the standard method mentioned above in Problem 10.5.  That is, we fix
+arbitrary $z \in Z(G)$ and $a \in G$, and show that $aza^{-1} \in Z(G)$.
+Indeed, since $z$ belongs to  $Z(G)$, it commutes with every element of $G$.
+Therefore, $aza^{-1} = aa^{-1}z = e z  = z\in Z(G)$.
+\qed
+
+\medskip
+Although the proof above is nice and short, there is another approach to this
+problem that is worth considering because it involves an automorphism,
+called an inner automorphism, that will come up again and again. An 
+\emph{inner automorphism} is an automorphism $\varphi_a: G \rightarrow G$ of the
+form $\varphi_a(x) = axa^{-1}$.  The alternative proof  is also worth studying
+because it employs an important idea that we will use again in Problem 6 below
+when we prove \emph{Cayley's Representation Theorem}, which says that
+every group $G$ is isomorphic to a subgroup of the permutation group $\Sym(G)$.
+
+\medskip
+
+\noindent
+\emph{Proof 2:}
+For $a \in G$, consider the function 
+$\varphi_a : G \rightarrow G$ defined by
+$\varphi_a(g) =aga^{-1}$.
+It is not hard to show that the function
+$\varphi : G \rightarrow \Sym(G)$ defined by $\varphi(a) = \varphi_a$---that is,
+the function sending each $a\in G$ to the permutation $\varphi_a\in
+\Sym(G)$---is a group homomorphism.   
+Moreover, the kernel of $\varphi$ is
+\begin{align*}
+\ker \varphi &= \{(a, b) \in G^2 : \varphi(a) = \varphi(b)\}
+= \{(a, b) \in G^2 : \varphi_a = \varphi_b\}\\
+&= \{(a, b) \in G^2 : \varphi_a(g)= \varphi_b(g) \text{ for all } g \in G\}\\
+&= \{(a, b) \in G^2 : aga^{-1}= bgb^{-1} \text{ for all } g \in G\}.
+\end{align*}
+The equivalence class of $\ker \varphi$ that contains the identity element of
+$G$ (what the book calls the ``kernel'' of $\varphi$) is the set
+\begin{align*}
+N_\varphi % &:= \varphi^{-1}(\{e\})\\
+&= \{ a \in G : \varphi_a = \varphi_e\}\\
+&= \{ a \in G : aga^{-1} = g \text{ for all } g\in G\}\\
+&= \{ a \in G : ag = ga \text{ for all } g\in G\}\\
+&= Z(G).
+\end{align*}
+Finally, recall the following {\bf important fact:}\footnote{We proved this in class. It is also proved in the book.} 
+\medskip
+\begin{quote}
+  \emph{For any group homomorphism $\varphi: G \rightarrow H$, the subset
+    \[
+    N_\varphi = \{g \in G : \varphi(g) = e_H\}
+    \]
+    of elements mapped by $\varphi$ to the identity of $H$ is a normal subgroup of $G$.}
+\end{quote}
+\medskip
+By taking $\varphi$ to be the conjugation homomorphism as above, we have
+$Z(G) = N_\varphi$.  Therefore, $Z(G) \triangleleft G$.
+\qed
+
+\medskip
+
+\emph{Remark:} At this point, Proof 2 might seem harder and more complicated
+than Proof~1.  However, once you become more comfortable with such arguments
+you may find that the easiest and quickest way to see that a certain subgroup is
+normal is to simply note that it is (the identity class of) the kernel of a homomorphism.
+
+\bigskip
+
+ \item[(d)]
+\emph{Claim:} 
+If $G / Z(G)$ is cyclic, then $G$ is abelian.
+
+\smallskip
+
+\noindent
+\begin{proof}
+For ease of notation, let $Z := Z(G)$.  Assume 
+$G/Z$ is cyclic. Then there exists $x\in G$ such that for each $g\in G$ 
+  we have $gZ = x^mZ$, for some $m\in \N$.
+  Fix $a, b\in G$.  We will show $ab = ba$.
+  Let $m$ and $n$ be such that $aZ = x^mZ$ and $bZ = x^nZ$.
+  Then $a = x^mz_1$ for some $z_1 \in Z$ and 
+  $b = x^nz_2$ for some $z_2 \in Z$.  Therefore,
+  \begin{align*}
+    a b &= x^m z_1\, x^n z_2 = x^m x^n z_2 z_1 \qquad \text{ (since $z_1 \in Z$) }\\
+    &= x^{m+n} z_2 z_1 = x^{n+m} z_2 z_1\\
+    &= x^nx^m z_2 z_1 = x^nz_2 x^m z_1 \qquad \text{ (since $z_2 \in Z$) }\\
+    &= b a.
+  \end{align*}
+\end{proof}
+ 
+\end{enumerate}
  
 \end{enumerate}
 
@@ -317,7 +438,7 @@ permutation of the set $G$.  That is, $\lambda_a$ belongs to the
 permutation group $\Sym(G)$.
 
 
-\bigskip
+\medskip
 
 \begin{enumerate}[(a)]
 \item 
@@ -340,5 +461,62 @@ As you have already proved, the kernel is an equivalence relation on $X$.}
   identity element $e$ of $G$.  Prove that $N$ is a normal subgroup of $G$.
 \end{enumerate}
 
+\noindent {\bf Solution:} 
+
+\begin{enumerate}[(a)]
+\item 
+\emph{Claim:} The function $\lambda: G \rightarrow \Sym(G)$ that takes $a\in G$
+to the permutation $\lambda_a\in \Sym(G)$ is a group homomorphism.  
+\begin{proof}
+The function $\lambda: G \rightarrow \Sym(G)$ is defined for each $a\in G$ by
+$\lambda(a) = \lambda_a$.  That is, $\lambda$ takes an element $a\in G$ as input
+and outputs the corresponding permutation function $\lambda_a: G \rightarrow G$. 
+The latter is defined by $\lambda_a(x) = a\cdot x$.\footnote{We could instead
+  represent $\lambda$ as a function of two variables
+  $\lambda: G \times G \rightarrow G$, where $\lambda(a,x) = a\cdot x$.
+  However, in the context of this problem, and in the second proof of 10.13(d),
+  it is cleaner to write $\lambda(a)(x)$, so that  
+  $\lambda : G \rightarrow (G \rightarrow G)$. That is, upon input
+  $a\in G$ we get a function $\lambda(a): G\rightarrow G$ as output.
+  This is sometimes called \href{http://en.wikipedia.org/wiki/Currying}{Currying}. }
+
+We will show that $\lambda$ respects the interpretation of the binary operations
+of $G$ and $\Sym(G)$.  That is, we will show that $\lambda(a\cdot b) =
+\lambda(a) \circ \lambda(b)$ for all $a, b \in G$.  
+
+Fix $a, b \in G$.  We must show that
+the permutation 
+$\lambda(a\cdot b) = \lambda_{ab}$
+is the same as the permutation 
+$\lambda(a) \circ \lambda(b) = \lambda_a \circ \lambda_b$.
+Indeed, for all $g \in G$,
+\begin{align*}
+\lambda_{ab} (g) &= (a\cdot b) \cdot g = a \cdot (b \cdot g) \qquad (\text{associativity})\\
+&= a \cdot \lambda_b(g) = \lambda_a (\lambda_b(g)) \\
+& = (\lambda_a \circ \lambda_b)(g).
+\end{align*}
+
+\end{proof}
+
+\medskip
+
+\item The kernel of $\lambda$ is
+  \begin{align*}
+\ker \lambda &= \{(a,b) \in G^2 : \lambda(a) = \lambda(b)\}\\
+ &= \{(a,b) \in G^2: \lambda_a(x) = \lambda_b(x) \text{ for all $x \in G$}\}\\
+ &= \{(a,b) \in G^2: a\cdot x = b\cdot x \text{ for all $x \in G$}\}\\
+ &= \{(a,b) \in G^2: a= b\},
+  \end{align*}
+that is, $\ker \lambda$ is the trivial equivalence relation $0_G := \{(a,a): a\in G\}$.
+
+\bigskip
+
+\item Let $N$ denote the equivalence class of $\ker\lambda$ that contains the
+  identity element $e$ of $G$.  Then 
+\[
+N = \{a \in G : (a, e) \in \ker \lambda\} = \{e\}.
+\]
+Clearly, $\{e\} \triangleleft G$ since $xex^{-1} = xx^{-1} = e$ for every $x\in G$.
+\end{enumerate}
 
 \end{document}

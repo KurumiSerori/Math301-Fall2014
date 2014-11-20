@@ -338,11 +338,20 @@ $k \in K$, prove that $G$ is the internal direct product of $H$ and $K$.
 \medskip
 \noindent {\bf Solution:}  
 Assume $hk = kh$ for all $h\in H$ and $k\in K$.
-Suppose $x \in H\cap K$, then $x \in H$ implies $\<x\>$ is a subgroup of $H$ so,
+Suppose $x \in H\cap K$. Then $x \in H$ implies $\<x\>$ is a subgroup of $H$ so,
 by Lagrange's Theorem $|x|$ divides $|H| = 4$.
 Similarly $x \in K$ implies $\<x\>$ is a subgroup of $K$ so,
 by Lagrange's Theorem $|x|$ divides $|K| = 5$. Since $|x|$ divides both 4 and 5,
-we must have $|x| = 1$, so $x = e$.  That is $H\cap K = \{e\}$. \qed
+we must have $|x| = 1$, so $x = e$.  That is $H\cap K = \{e\}$.
+
+To complete the proof, we must show $G = HK$.
+Since $[G : K] = |G|/|K| = 20/5 = 4$, there are four cosets of
+$K$ in $G$ and, since $H\cap K = \{e\}$, we can list these four cosets
+using as representatives the four distinct elements of $H$. That is,
+the cosets of $K$ in $G$ are $K, h_1K, h_2K, h_3K$.  Since any group is
+the disjoint union of the cosets of any subgroup, we have
+$G = K \cup h_1K \cup h_2K \cup h_3K = HK$.
+ \qed
 
 \vskip1cm
 

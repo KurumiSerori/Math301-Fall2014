@@ -4,6 +4,7 @@
 \usepackage{amsmath}
 \usepackage{url,enumerate}
 \usepackage{color,hyperref,enumerate,multicol}
+\usepackage{cleveref}
 \usepackage{ifthen}
 \newboolean{answers}
 %\setboolean{answers}{true}  % set to true to include TODO statements
@@ -13,6 +14,7 @@
 \newcommand{\<}{\ensuremath{\langle}}
 \renewcommand{\>}{\ensuremath{\rangle}}
 \newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
 \newcommand{\ur}{\ensuremath{\underline{\mathrm{r}}}}
 \newcommand{\uT}{\ensuremath{\underline{\mathrm{T}}}}
 \newcommand{\uF}{\ensuremath{\underline{\mathrm{F}}}}
@@ -37,6 +39,8 @@
 \newcommand{\meet}{\ensuremath{\wedge}}
 \newcommand{\join}{\ensuremath{\vee}}
 \newcommand{\dotsize}{1pt}
+\crefformat{footnote}{#2\footnotemark[#1]#3}
+
 \begin{document}
 %\thispagestyle{empty}
 \pagestyle{empty}
@@ -46,45 +50,13 @@
 \noindent {\bf MATH 301 - Section B}
 \hfill {\bf Fall 2014}
 \begin{center}
-{\bf Midterm Exam 2}
+{\bf Midterm Exam 2 -- SOLUTIONS}
 \thispagestyle{empty}
 %% covers sections 5.1--5.5 and 7.1--7.4
 \end{center}
-\vskip1cm
-\noindent {\bf RULES}
-\begin{enumerate}
-\item All phones and other electronic devices must be silenced for the duration
-  of the exam.
-\item No books, notes, or calculators allowed.
-%% \item Out of consideration for your classmates, do not make
-%% disturbing noises during the exam. If you need a tissue, please ask for one.
-%% \item Are you still reading the rules?  Did you read rule number 1?  If you
-%%   haven't yet taken out your phone to turn it off, read rule
-%%   number 1 a few more times.
-\end{enumerate}
-\vskip1cm
-{\it Cheating will not be tolerated.}  If there are any indications that a
-  student may have given or received unauthorized aid on this exam, the case 
-  will be brought to the ISU Office of Academic Integrity.% \\
-\\[4pt]
-After finishing the exam, please sign the following statement
-acknowledging that you understand and accept this policy:\\
-\\
-``On my honor as a student I,
-\underline{\phantom{XXXXXXXXXXXXXXXX}}, have neither
-given nor received unauthorized aid on this exam.''
-\hbox{} \hskip .75cm {\small (print name clearly)}\\
-\\
-\begin{flushright} Signature: \underline{\phantom{XXXXXXXXXXXXXXXXXXXXXXXX}}
-  Date: \underline{\phantom{XXXXXXXXXX}}
-\end{flushright}
 
-\begin{center}
-  
-{\bf Do not sign the pledge until after you have finished the exam.}
-\end{center}
+\bigskip
 
-\newpage
 \begin{enumerate}[{\bf 1.}]
 \item Give precise definitions of the following:
 
@@ -95,7 +67,6 @@ given nor received unauthorized aid on this exam.''
 
     \medskip
 
-    {\bf Answer:} 
     An {\bf $n$-ary operation} on a set $A$ is a function,
     $f: A^n \rightarrow A$, with domain $A^n$ and codomain $A$.
 
@@ -105,7 +76,6 @@ given nor received unauthorized aid on this exam.''
 
     \medskip
 
-    {\bf Answer:} 
     An {\bf $n$-ary relation} on a set $A$ is a subset of $A^n$.
 
     \bigskip
@@ -113,8 +83,6 @@ given nor received unauthorized aid on this exam.''
   \item {\bf algebra} or {\bf algebraic structure}
 
     \medskip
-
-    {\bf Answer:} 
 
     An {\bf algebra} or {\bf algebraic structure} is a pair $\<A, F\>$ consisting of a
     nonempty set $A$ along with a set $F$ of operations on $A$.
@@ -125,8 +93,6 @@ given nor received unauthorized aid on this exam.''
 
     \medskip
 
-    {\bf Answer:} 
-
     An {\bf relational structure} is a pair $\<A, R\>$ consisting of a
     nonempty set $A$ along with a set $R$ of relations on $A$.
 
@@ -136,7 +102,7 @@ given nor received unauthorized aid on this exam.''
 
     \medskip
 
-    {\bf Answer:} A {\bf group homomorphism} is a function 
+    A {\bf group homomorphism} is a function 
     $\varphi: G \rightarrow H$ from a group $G$ to a group $H$ satisfying,
     for all $x, y \in G$, $\varphi(x\cdot y) = \varphi(x) \cdot \varphi(y)$.
 
@@ -144,8 +110,6 @@ given nor received unauthorized aid on this exam.''
 
   \item {\bf normal subgroup}
     \medskip
-
-    {\bf Answer:} 
 
     A {\bf normal subgroup} of a group $G$ is a subgroup $N\leq G$ such that
     any one (hence all) of the following equivalent conditions holds for all $g\in G$:
@@ -167,25 +131,51 @@ given nor received unauthorized aid on this exam.''
   \item State \emph{Lagrange's Theorem} about the order of a group and its
     subgroups. (Be sure to state all assumptions that are needed in order for
     the theorem to hold.)  
-\vskip7cm
-    \item Recall that $G$ is the 
-      \emph{internal direct product} of the subgroups $H$ and $K$ if 
-      $H\cap K= \{e\}$ and $H$ and $K$ centralize each other (i.e., $hk = kh$ for
-      all $h\in H$ and $k\in K$). 
+
+    \medskip
+
+    {\bf Theorem.} Let $G$ be a finite group and let $H$ be a subgroup
+    of $G$. Then $|G|/|H| = [G : H]$ is the number of distinct left cosets of $H$ in
+    $G$. In particular, the number of elements in $H$ must divide the number of
+    elements in $G$.
+
+    \bigskip
+
+    \item Recall that $G$ is the \emph{internal direct product} of the subgroups
+      $H$ and $K$ if $G = HK$, and $H\cap K= \{e\}$, and $H$ and $K$ centralize
+      each other (i.e., $hk = kh$ for all $h\in H$ and $k\in
+      K$).\footnote{\label{note1}Note to students: On the actual exam, I left
+        out the condition that $G = HK$, and points were not deducted from
+        answers that didn't check this condition.}
+
+\medskip
 
       Suppose $G$ has order 28 and subgroups $H$ and $K$ of orders 4
       and 7 respectively which centralize each other.  Prove that
       $G$ is the internal direct product of $H$ and $K$.
-  \end{enumerate}
 
-%% \medskip
-%% \noindent {\bf Solution:}  
-%% Assume $hk = kh$ for all $h\in H$ and $k\in K$.
-%% Suppose $x \in H\cap K$, then $x \in H$ implies $\<x\>$ is a subgroup of $H$ so,
-%% by Lagrange's Theorem $|x|$ divides $|H| = 4$.
-%% Similarly $x \in K$ implies $\<x\>$ is a subgroup of $K$ so,
-%% by Lagrange's Theorem $|x|$ divides $|K| = 5$. Since $|x|$ divides both 4 and 5,
-%% we must have $|x| = 1$, so $x = e$.  That is $H\cap K = \{e\}$. \qed
+      \medskip
+
+      \noindent {\bf Solution:} 
+      Since we are already given that $hk = kh$ for all $h\in H$ and $k\in K$, we 
+      must show that $H\cap K= \{e\}$ and $G = HK$.\cref{note1}
+
+      \medskip
+      Suppose $x \in H\cap K$, then $x \in H$ implies $\<x\>$ is a subgroup of $H$ so,
+      by Lagrange's Theorem $|x|$ divides $|H| = 4$.
+      Similarly $x \in K$ implies $\<x\>$ is a subgroup of $K$ so,
+      by Lagrange's Theorem $|x|$ divides $|K| = 7$. Since $|x|$ divides both 4 and 7,
+      we must have $|x| = 1$, so $x = e$.  That is $H\cap K = \{e\}$.
+
+      \medskip
+      Finally, we show that $G = HK$.\cref{note1}
+      Since $[G : K] = |G|/|K| = 28/7 = 4$, there are four cosets of
+      $K$ in $G$ and, since $H\cap K = \{e\}$, we can list these four cosets
+      using as representatives the four distinct elements of $H$. That is,
+      the cosets of $K$ in $G$ are $K, h_1K, h_2K, h_3K$.  Since any group is
+      the disjoint union of the cosets of any of its subgroups, we have
+      $G = K \cup h_1K \cup h_2K \cup h_3K = HK$.
+  \end{enumerate}
 \newpage
 \item {\bf Prove either (a) OR (b) OR (c).} If you prove more than one, circle
   the letter of the one you want graded.
@@ -194,15 +184,6 @@ given nor received unauthorized aid on this exam.''
 \item
 If $G \cong H$ and $G$ is cyclic, then $H$ is cyclic.
 
-%% \medskip
-%% \noindent {\bf Solution:} Suppose $G = \<a\> \cong H$ and suppose 
-%% $\varphi: G \rightarrow H$ is an isomorphism.  Then 
-%% $H = \<\varphi(a)\>$.  To see this, fix $h\in H$.  We will show 
-%% $h = (\varphi(a))^k$ for some $k\in \N$. Indeed, let $b = \varphi^{-1}(h)$.
-%% Since $b\in G = \<a\>$, we must have $b = a^k$ for some $k\in \N$.
-%% Also, $\varphi(a^k) = (\varphi(a))^k$, since $\varphi$ is a homomorphism. 
-%% Therefore, $(\varphi(a))^k = \varphi(a^k) = \varphi(b) = \varphi(\varphi^{-1}(h)) = h$.
-%% \qed
 \item If a group $G$ has a subgroup $H$ of index 2, then $H$ is
 normal in $G$. \\
 Conclude that $A_n \triangleleft S_n$ for $n \geq 3$.
@@ -213,29 +194,65 @@ $H$ is normal in $G$.
 
 \end{enumerate}
 
+\medskip
+\noindent {\bf Solution:}
+\begin{enumerate}
+\item
+{\bf Claim:} If $G \cong H$ and $G$ is cyclic, then $H$ is cyclic.
 
-%% \medskip
-%% \noindent {\bf Solution:} 
-%% We will solve this using\\[4pt]
-%% \indent {\bf another standard way to prove a subgroup $H$ is normal in $G$:}
-%% \medskip
-%% \begin{quote}
-%% \emph{Pick an arbitrary element $g\in G$ and show that $gHg^{-1} = H$.}
-%% \end{quote}
-%% \medskip
-%% First, given a subgroup $H\leq G$, and an arbitrary element $g\in G$, it is not hard to
-%% see that the \emph{conjugate of $H$ by $g$}, which is defined by
-%% \[
-%% gHg^{-1} := \{ghg^{-1} | h\in H\},
-%% \]
-%% is also a subgroup of $G$.  Moreover, the function $h \mapsto ghg^{-1}$ is a
-%% bijection.\footnote{In fact, as we will see later, $x\mapsto gxg^{-1}$ 
-%% is an automorphism.}  
-%% Therefore, $|H| = |gHg^{-1}|$.  If $|H| =k$ and if $H$ is the only
-%% subgroup of $G$ of order $k$, then, since $|gHg^{-1}| = k$, we must have 
-%% $H = gHg^{-1}$.
-%% Since $g$ was arbitrary, this proves that $H$ is normal in $G$.
-%% \qed
+\medskip
+
+{\bf Proof:}
+ Suppose $G = \<a\> \cong H$ and suppose 
+$\varphi: G \rightarrow H$ is an isomorphism.  Then 
+$H = \<\varphi(a)\>$.  To see this, fix $h\in H$.  We will show 
+$h = (\varphi(a))^k$ for some $k\in \N$. Indeed, let $b = \varphi^{-1}(h)$.
+Since $b\in G = \<a\>$, we must have $b = a^k$ for some $k\in \N$.
+Also, $\varphi(a^k) = (\varphi(a))^k$, since $\varphi$ is a homomorphism. 
+Therefore, $(\varphi(a))^k = \varphi(a^k) = \varphi(b) = \varphi(\varphi^{-1}(h)) = h$.
+
+
+
+\bigskip
+
+\item {\bf Claim:} If a group $G$ has a subgroup $H$ of index 2, then $H$ is
+normal in $G$. \\
+Conclude that $A_n \triangleleft S_n$ for $n \geq 3$.
+
+\medskip
+
+{\bf Proof:}
+If $[G:H]=2$, then there are two left cosets of $H$ in $G$.
+Pick a $g \in G$ with $g \notin H$. 
+Then the two left cosets of $H$ in $G$, 
+are $H$ and $gH$. Recall that the set of left cosets partitions the group into
+a \emph{disjoint} union. In the present case, $G = H \cup gH$.  
+Similarly, the two right cosets of $H$ in
+$G$ must be $H$ and $Hg$, and again we have a partition of $G$ as
+the \emph{disjoint} union of sets $G = H \cup Hg$.  It follows that $gH = G-H = Hg$.
+
+
+
+\bigskip
+
+\item 
+{\bf Claim:}
+If a group $G$ has exactly one subgroup $H$ of order $k$, then
+$H$ is normal in $G$. 
+
+\medskip
+
+{\bf Proof:}
+Given a subgroup $H\leq G$, and an arbitrary element $g\in G$, 
+the set $gHg^{-1} := \{ghg^{-1} | h\in H\}$ is also a subgroup of $G$.
+Moreover, the function $h \mapsto ghg^{-1}$ is a bijection.
+Therefore, $|H| = |gHg^{-1}|$.  If $|H| =k$ and if $H$ is the only
+subgroup of order $k$, then, since $|gHg^{-1}| = k$, we must have 
+$H = gHg^{-1}$.
+Since $g$ was arbitrary, this proves that $H$ is normal in $G$.
+
+\end{enumerate}
+
 
 \newpage
 

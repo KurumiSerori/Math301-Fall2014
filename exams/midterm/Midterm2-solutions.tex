@@ -25,7 +25,9 @@
 \newcommand{\ub}{\ensuremath{\underline{\mathrm{b}}}}
 \newcommand{\un}{\ensuremath{\underline{\mathrm{n}}}}
 \newcommand{\uv}{\ensuremath{\underline{\mathrm{v}}}}
+\newcommand{\Sym}{\ensuremath{\operatorname{Sym}}}
 \newcommand{\id}{\ensuremath{\operatorname{id}}}
+\newcommand{\bG}{\ensuremath{\mathbf{G}}}
 \newcommand{\ba}{\ensuremath{\mathbf{a}}}
 \newcommand{\bv}{\ensuremath{\mathbf{v}}}
 \newcommand{\bb}{\ensuremath{\mathbf{b}}}
@@ -363,6 +365,66 @@ Is $D_4/Z(D_4)$ cyclic?  Explain. [Hint: Recall, $G$ is abelian if $G/Z(G)$ is c
 
 Since $D_4$ is nonabelian, $D_4/Z(D_4)$ is not cyclic.
 \end{enumerate}
+\newpage
+\item State the First Isomorphism Theorem and use it to prove that every group
+  $G$ is isomorphic to a subgroup of $\Sym(G)$. [Hint: show that a certain
+  function $\lambda : G \rightarrow \Sym(G)$ is a homomorphism with trivial
+  kernel.]
+
+\medskip
+
+  {\bf First Isomorphism Theorem.}
+
+  Suppose $\varphi: G \rightarrow H$ is a group homomorphism
+  and 
+  \[
+  N := \varphi^{-1}(\{e_H\}) = \{g\in G: \varphi(g) = e_H\}.
+  \]
+  Then there is a one-to-one
+  group homomrorphism $\psi : G/N \rightarrow H$ such that 
+  $\psi \pi = \varphi$. 
+
+  %% (The conclusion says that, for all $g\in G$, 
+  %% $\psi \pi(g) = \varphi(g)$ or $\psi(gN) = \varphi(g)$.)
+
+Let $\bG = \<G, \cdot, ^{-1}, e\>$ be a finite group of order $n$.  
+Take the set $G$ (the elements of $\bG$) and consider the group of all
+permutations of these elements.  We will denote this group by
+$\Sym(G) = \<S, \circ, ^{-1}, \id\>$.
+Fix an element $a\in G$ and recall that the function
+$\lambda_a: G \rightarrow G$, defined by $\lambda_a(g) = a\cdot g$, is a
+permutation of the set $G$.  That is, $\lambda_a$ belongs to the
+permutation group $\Sym(G)$.  
+The function $\lambda: G \rightarrow \Sym(G)$ defined by 
+$a\mapsto \lambda_a$ is a group homomorphism.\footnote{Note that the function
+is given, for each $a\in G$, by $\lambda(a) = \lambda_a$.}
+To see this, fix $a, b \in G$.  We must show that
+the permutation 
+$\lambda(a\cdot b) = \lambda_{ab}$
+is the same as the permutation 
+$\lambda(a) \circ \lambda(b) = \lambda_a \circ \lambda_b$.
+Indeed, for all $g \in G$,
+\begin{align*}
+\lambda_{ab} (g) &= (a\cdot b) \cdot g = a \cdot (b \cdot g) \qquad (\text{associativity})\\
+&= a \cdot \lambda_b(g) = \lambda_a (\lambda_b(g)) \\
+& = (\lambda_a \circ \lambda_b)(g).
+\end{align*}
+
+Therefore, by the First Isomorphism Theorem, there is a group homomorphism 
+$\psi : G/N \rightarrow \Sym(G)$ such that $\psi \pi = \varphi$. Here,
+$N := \lambda^{-1}(\{\id\}) = \{a\in G: \lambda_a = \id\}$ where
+$\id$ is the identity permutation in $\Sym(G)$, that is $\id(g) =g$.  Also note
+that, since $\psi$ is a group homomorphism, the image of $G/N$ under $\psi$ is a
+subgroup of $\Sym(G)$.
+
+Now
+$N = \{a\in G: \lambda_a = \id\} = \{a\in G: ax = x \text{ for all } x \in G\} = \{e\}$.
+Therefore, $N = \{e\}$, and so $G \cong G/N$.  If $\pi: G \rightarrow G/N$
+denotes this isomorphism, we have 
+$\psi\circ \pi : G \rightarrow G/N \rightarrow \Sym(G)$.  Since $\psi$ and $\pi$
+are both one-to-one in this case, we have an isomorphism between $G$ and the
+subgroup $(\psi\circ \pi)(G)$ of $\Sym(G)$.  That is $G$ is isomorphic to a
+subgroup of $\Sym(G)$.
 \newpage
 
 \item Let $\bS = \<S, \cdot\>$ and $\bT = \<T, \circ\>$ be two semilattices.

@@ -50,12 +50,12 @@
 \noindent \textbf{Math 301} \hskip5cm {\bf Homework 12} \hfill {\bf Fall 2014}
 \vskip1cm
 \noindent {\bf Exercises:} 1--7 of the file
-\href{https://github.com/williamdemeo/Math301-Fall2014/blob/master/misc/GeneralAlgebraNotes.pdf?raw=true}{GeneralAlgebraNotes.pdf}.\\
-{\bf Submit:}  Solutions to Exercises 5 and 7.
+\href{https://github.com/williamdemeo/Math301-Fall2014/blob/master/misc/GeneralAlgebraNotes.pdf?raw=true}{GeneralAlgebraNotes.pdf}. {\bf
+  Submit:}  Solutions to Exercises 5 and 7.
 \\
 {\bf Due:} Friday, 12/5.
 
-\bigskip
+\medskip
 
 \begin{enumerate}
   %% 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -96,17 +96,15 @@ G/N_\varphi \cong \varphi(G),
 where $N_\varphi$ is the kernel subgroup associated with $\varphi$, and 
 where $\varphi(G) = \{ \varphi(g) : g\in G\}$ is the image of $G$ under the map
 $\varphi$. Since $\varphi$ is a homomorphism, and since homomorphisms map
-subgroups of $G$ to subgroups of the codomain, it follows that 
+subgroups to subgroups, it follows that 
 $\varphi(G)$ is a subgroup of $\GKGL$. 
-Thus we have shown that $G/N_\varphi$ is isomorphic to a subgroup of $\GKGL$. 
+Thus $G/N_\varphi$ is isomorphic to a subgroup of $\GKGL$. 
 
 Finally, the identity element of $\GKGL$ is $(K,L)$, so the kernel
 subgroup is 
 \begin{align*}
-  N_\varphi &= \{g \in G : \varphi(g) = (K,L)\}\\
-&= \{g \in G : (gK,gL) = (K,L)\}\\
-&= \{g \in G : gK = K \text{ and } gL=L\}\\
-&= \{g \in G : g\in K \text{ and } g\in L\}\\
+  N_\varphi &= \{g \in G : \varphi(g) = (K,L)\}= \{g \in G : (gK,gL) = (K,L)\}\\
+&= \{g \in G : gK = K \text{ and } gL=L\}= \{g \in G : g\in K \text{ and } g\in L\}\\
 &= K\cap L.
 \end{align*}
 By assumption $K\cap L= \{e\}$. Therefore, 
@@ -117,7 +115,6 @@ $G = G/\{e\}$ is technically an isomorphism $G \cong G/\{e\}$,
   common practice to identify the elements of $G/\{e\} = \{\{g\} : g\in G\}$ with the
   elements of $G$, and say that the quotient group $G/\{e\}$ \emph{is} the group
   $G$.}
-\medskip
 
 %% \noindent {\bf Solution 2:}
 %%       Define the natural mapping
@@ -149,11 +146,19 @@ $G = G/\{e\}$ is technically an isomorphism $G \cong G/\{e\}$,
 %%         G/K \times G/L$, we have proved that $G/K\cap L$ can be embedded as a
 %%         subgroup in $G/K \times G/L$.
 
-        The index of $G/K\cap L$ in $G/K \times G/L$, in terms of $[G:K], [G:L]$ and
-        $[G:K\cap L]$, is
+        To find the index of $\varphi(G)$ in $G/K \times G/L$, in terms of $[G:K], [G:L]$ and
+        $[G:K\cap L]$, note that 
+        $G/K\cap L \cong \varphi(G)$ implies 
+        $|\varphi(G)| = |G/K\cap L| = [G: K \cap L]$.
+        Also, 
         \[
-        |(G/K \times G/L)|/ |G/K\cap L| = \frac{(|G|/|K|) (|G|/|L|)}{|G|/|K\cap L|}
-        = \frac{[G:K] [G:L]}{[G:K\cap L]}.
+        |G/K \times G/L| = |G/K| |G/L| = [G:K][G:L].
+        \] 
+        Therefore, the index of $\varphi(G)$ in $G/K \times G/L$ is
+        \[
+          [(G/K \times G/L):\varphi(G)] 
+          = \frac{|G/K \times G/L|}{|\varphi(G)|}
+          = \frac{[G:K][G:L]}{[G: K \cap L]}.
         \]
 
 \bigskip

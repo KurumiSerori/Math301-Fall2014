@@ -1,0 +1,339 @@
+\documentclass[12pt,reqno]{amsart}
+\usepackage[top=2cm, left=2cm,right=2cm,bottom=2cm]{geometry}
+\renewcommand{\baselinestretch}{1.2}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{scalefnt}
+\usepackage{tikz}
+\usepackage{color,hyperref,enumerate,multicol}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.3}
+\hypersetup{colorlinks,breaklinks,
+            linkcolor=darkblue,urlcolor=darkblue,
+            anchorcolor=darkblue,citecolor=darkblue}
+            
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\pagestyle{empty}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\bL}{\ensuremath{\mathbf{L}}}
+\newcommand{\bP}{\ensuremath{\mathbf{P}}}
+\newcommand{\bQ}{\ensuremath{\mathbf{Q}}}
+\newcommand{\bA}{\ensuremath{\mathbf{A}}}
+\newcommand{\bB}{\ensuremath{\mathbf{B}}}
+\newcommand{\bG}{\ensuremath{\mathbf{G}}}
+\newcommand{\bH}{\ensuremath{\mathbf{H}}}
+\newcommand{\id}{\ensuremath{\operatorname{id}}}
+\newcommand{\invG}{\ensuremath{\operatorname{inv}^{\bG}}}
+\newcommand{\invH}{\ensuremath{\operatorname{inv}^{\bH}}}
+\newcommand{\meet}{\ensuremath{\wedge}}
+\newcommand{\Meet}{\ensuremath{\bigwedge}}
+\newcommand{\<}{\ensuremath{\langle}}
+\renewcommand{\>}{\ensuremath{\rangle}}
+\newcommand{\join}{\ensuremath{\vee}}
+\renewcommand{\emptyset}{\ensuremath{\varnothing}}
+\renewcommand{\subset}{\ensuremath{\subsetneq}}
+\newcommand{\boldemph}{\emph}
+\newcommand{\lcm}{\ensuremath{\operatorname{lcm}}}
+\newcommand{\Sym}{\ensuremath{\operatorname{Sym}}}
+%\newcommand{\bG}{\ensuremath{\mathbf{G}}}
+\newcommand{\subnormal}{\ensuremath{\triangleleft}}
+\newcommand{\supnormal}{\ensuremath{\triangleright}}
+\newcommand{\notsubnormal}{\ensuremath{\ntrianglelefteqslant}}
+
+\newcommand{\probskip}{\vskip1cm}
+
+\begin{document}
+\thispagestyle{empty}
+
+\noindent \textbf{Math 301} \hskip5cm {\bf Homework 12} \hfill {\bf Fall 2014}
+\vskip1cm
+\noindent {\bf Exercises:} 1--7 of the file
+\href{https://github.com/williamdemeo/Math301-Fall2014/blob/master/misc/GeneralAlgebraNotes.pdf?raw=true}{GeneralAlgebraNotes.pdf}.\\
+{\bf Submit:}  Solutions to Exercises 5 and 7.
+\\
+{\bf Due:} Friday, 12/5.
+
+\bigskip
+
+\begin{enumerate}
+  %% 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item[{\bf Ex.~5.}] 
+    Suppose $K$ and $L$ are normal subgroups of $G$. Prove that $G/K\cap L$ is
+    isomorphic to a subgroup of $G/K \times G/L$ (the external direct
+    product),\footnote{Note 
+      that the expression $G/K\cap L$ can only be interpreted as $G/(K\cap L)$,
+      since $(G/K)\cap L$ doesn't make sense.} and compute the index
+    of this subgroup in $G/K \times G/L$, 
+    in terms of $[G:K]$, $[G:L]$, and $[G:KL]$.
+
+\medskip
+%% Below are two alternative solutions to the first part of the problem.  The only
+%% difference is that the first makes use of the First Isomorphism Theorem, while
+%% the second proves the result directly.  (I recommend students learn the
+%% first solution in order to become more comfortable with the First
+%% Isomorphism Theorem.) 
+\newcommand\GKGL{\ensuremath{G/K \times G/L}}
+
+%% \noindent {\bf Solution 1:}
+\noindent {\bf Solution:}
+Define $\varphi: G \rightarrow G/K \times G/L$ by $\varphi(g) = (gK, gL)$.
+First we show $\varphi$ is a homomorphism. By the definition of coset
+multiplication and the definition of multiplication in Cartesian
+products,
+\begin{align*}
+\varphi(g_1 g_2) &= 
+(g_1 g_2K,g_1 g_2L) = (g_1 Kg_2K,g_1 Lg_2L)\\
+ &= (g_1 K,g_1L) (g_2K g_2L) = \varphi(g_1)\varphi(g_2).
+\end{align*}
+for all $g_1, g_2 \in G$, which proves that $\varphi$ is a homomorphism
+from $G$ to $\GKGL$.
+Therefore, by the First Isomorphism Theorem, 
+\[
+G/N_\varphi \cong \varphi(G),
+\] 
+where $N_\varphi$ is the kernel subgroup associated with $\varphi$, and 
+where $\varphi(G) = \{ \varphi(g) : g\in G\}$ is the image of $G$ under the map
+$\varphi$. Since $\varphi$ is a homomorphism, and since homomorphisms map
+subgroups of $G$ to subgroups of the codomain, it follows that 
+$\varphi(G)$ is a subgroup of $\GKGL$. 
+Thus we have shown that $G/N_\varphi$ is isomorphic to a subgroup of $\GKGL$. 
+
+Finally, the identity element of $\GKGL$ is $(K,L)$, so the kernel
+subgroup is 
+\begin{align*}
+  N_\varphi &= \{g \in G : \varphi(g) = (K,L)\}\\
+&= \{g \in G : (gK,gL) = (K,L)\}\\
+&= \{g \in G : gK = K \text{ and } gL=L\}\\
+&= \{g \in G : g\in K \text{ and } g\in L\}\\
+&= K\cap L.
+\end{align*}
+By assumption $K\cap L= \{e\}$. Therefore, 
+$G = G/\{e\} = G/N_\varphi \cong \varphi(G)$, which is a subgroup of $\GKGL$.\footnote{The equality 
+$G = G/\{e\}$ is technically an isomorphism $G \cong G/\{e\}$, 
+  since $G/\{e\}$ is a collection of cosets, namely 
+  $G/\{e\} = \{g\{e\} : g\in G\}$. However, since $g\{e\} = \{g\}$, it's
+  common practice to identify the elements of $G/\{e\} = \{\{g\} : g\in G\}$ with the
+  elements of $G$, and say that the quotient group $G/\{e\}$ \emph{is} the group
+  $G$.}
+\medskip
+
+%% \noindent {\bf Solution 2:}
+%%       Define the natural mapping
+%%         \[
+%%         G/K\cap L \ni g(K\cap L) \mapsto (gK, gL) \in G/K \times G/L.
+%%         \]
+%%         We must check that this mapping is well-defined and one-to-one, as follows:
+%%         \begin{align*}
+%%           x(K\cap L) =y(K\cap L)  \quad&  \Leftrightarrow \quad x^{-1}y \in K\cap L\\
+%%           & \Leftrightarrow \quad  x^{-1}y \in K \; \text{ and } \; x^{-1}y \in L\\
+%%           & \Leftrightarrow \quad xK = yK \;\text{ and } \; xL = yL\\
+%%           & \Leftrightarrow \quad (xK, xL) = (yK, yL).
+%%         \end{align*}
+%%         To be clear, the forward implications $(\Rightarrow)$ prove well-definedness,
+%%         the reverse implications $(\Leftarrow)$ one-to-oneness. Also, it is important to
+%%         note that these calculations take $G/K$, $G/L$, and $G/K\cap L$ to be \emph{groups},
+%%         with multiplications given by $xK yK = xyK$, etc.  This requires that the
+%%         subgroups $K$ and $L$, and hence $K\cap L$, be normal.  If, for example, $K$
+%%         were not normal, then $G/K$ would not be a group.
+   
+%%         It remains to check that the mapping is a homomorphism.  Let $\varphi$ denote
+%%         the mapping, and  fix two cosets $x(K\cap L)$ and $y(K\cap L)$ in $G/(K\cap L)$.  Then
+%%         \begin{align*}
+%%         \varphi(x(K\cap L) y(K\cap L)) &= \varphi(xy(K\cap L)) = (xyK,
+%%         xyL)=(xKyK,xLyL)\\[4pt]
+%%         &=(xK,xL)\,(yK,yL) = \varphi(x(K\cap L))\,\varphi(y(K\cap L)).
+%%         \end{align*}
+%%         By exhibiting a monomorphism $\varphi: G/K\cap L \hookrightarrow
+%%         G/K \times G/L$, we have proved that $G/K\cap L$ can be embedded as a
+%%         subgroup in $G/K \times G/L$.
+
+        The index of $G/K\cap L$ in $G/K \times G/L$, in terms of $[G:K], [G:L]$ and
+        $[G:K\cap L]$, is
+        \[
+        |(G/K \times G/L)|/ |G/K\cap L| = \frac{(|G|/|K|) (|G|/|L|)}{|G|/|K\cap L|}
+        = \frac{[G:K] [G:L]}{[G:K\cap L]}.
+        \]
+
+\bigskip
+\noindent {\it Note to students:} The above solution illustrates a {\bf standard method}
+of applying the First Isomorphism Theorem to prove that a factor group $G/N$ is
+isomorphic to a subgroup of~$H$.  Let us pause to abstract the essence
+of this method, so you will know exactly how to apply it in future
+situations.  
+
+To begin with, we are presented with the following data: $G$, $N$, and $H$, are
+groups, and $N$ is a normal subgroup of $G$ (so $G/N$ is a factor group). Our
+objective is to show that $G/N$ is isomorphic to some subgroup of $H$.  (The
+specific subgroup $K\leq H$ may or may not be specified in advance.)
+
+\noindent {\bf Standard method:} To show $G/N \cong K$ for some subgroup $K \leq H$, 
+\begin{enumerate}
+\item Find a function $\varphi: G \rightarrow H$ with the following properties
+  (which you must check):
+  \begin{enumerate}
+  \item $\varphi$ is a homomorphism from $G$ to $H$
+  \item the image of $\varphi$ is $K = \varphi(G)$
+  \item the kernel subgroup of $\varphi$ is $N = \{g\in G: \varphi(g) = e_H\}$
+  \end{enumerate}
+\item Conclude by citing the First Isomorphism Theorem, which implies
+  \[
+  G/N \cong \varphi(G) = K\leq H.
+  \]
+\end{enumerate}
+Notice that even though our initial goal is to find an isomorphism $G/N \cong K$,
+we don't start by searching around for a one-to-one and onto homomorphisms
+defined on $G/N$.
+Rather, we start with the (seemingly) more modest (but equivalent) goal of
+finding a homomorphism from $G$ to $H$ with kernel subgroup $N$ and image
+$K$. Once we accomplish this, the First Isomorphism Theorem does the rest of the
+work for us.
+
+\bigskip
+
+\item[{\bf Ex.~7.}] 
+    Let $G$ be a nonabelian simple group.  Let $S_n$ be the symmetric group of all
+  permutations on an $n$-element set, and let $A_n$ be the alternating group.
+    \begin{enumerate}[{\bf a.}]
+    \item 
+      Show that if $G$ is a subgroup of $S_n$, $n$ finite, then $G$ is a subgroup
+      of $A_n$.
+    \item Let $H$ be a proper subgroup of $G$, and, for $g\in G$, let $\lambda_g$ be
+      the map of the set of left cosets of $H$ onto themselves defined by
+      $\lambda_g(xH) = gxH$.  
+      Show that the map $g\mapsto \lambda_g$ is a monomorphism (injective
+      homomorphism) of $G$ into the group of permutations of the set of left
+      cosets of $H$. 
+    \item Let $H$ be a subgroup of $G$ of finite index $n$  and assume $n>1$ (so $H \neq G$).  
+      Show that $G$ can be embedded in $A_n$. (That is, show that $G$ is
+      isomorphic to a subgroup of $A_n$.
+    \item If $G$ is infinite, it has no proper subgroup of finite index.
+    \end{enumerate}
+
+\medskip
+
+\noindent {\bf Solution:}
+    \begin{enumerate}
+    \item Suppose $G$ is a subgroup of $S_n$, $n$ finite, and 
+      assume $G$ is nonabelian and simple.  Clearly $G \neq S_n$, since $S_n$ is not simple
+      (for example, $A_n \subnormal S_n$).
+      Consider $G\cap A_n$. This is a normal subgroup of $G$.  To see this, note
+      that if $\sigma \in G\cap A_n$ and $g\in G$, then $g\sigma g^{-1}\in G$ and
+      $g\sigma g^{-1}\in A_n$, since $A_n \subnormal S_n$, so 
+      $g\sigma g^{-1}\in G \cap A_n$.  
+      
+      So, $G\cap A_n\subnormal G$ and $G$ is simple, so $G\cap A_n = (e)$ or
+      $G\cap A_n = G$.   
+      In case $G\cap A_n = G$, we have $G\leq A_n$ and we are done.
+      The other case, $G\cap A_n = (e)$, in fact never occurs under the given
+      hypotheses. Two alternative proofs of this fact are given below.  
+
+      {\it Proof 1:} Suppose $G\cap A_n = (e)$.  Then $G$ contains only $e$ and odd
+      permutations.  
+      Let $\zeta\in G$ be an odd permutation.  Then $\zeta^2$ is an even permutation in $G$, so it must
+      be $e$.  Thus, every nonidentity element of $G$ has order 2.  Suppose $\eta$ is
+      another odd permutation in $G$. Then $\zeta \eta$ is an even permutation in $G$, so
+      $\zeta \eta = e$.  Therefore, $\zeta \zeta = e = \zeta \eta$, so $\eta = \zeta$.
+      This shows $G$ has only two elements $e$ and $\zeta$.  But then $G\cong \Z_2$ is abelian,
+      contradicting our hypothesis. 
+
+      {\it Proof 2:} 
+      If $G$ were not a subgroup of $A_n$, then the group
+      $G A_n\leq S_n$ would have order larger than $|A_n| = |S_n|/2$. 
+      By Lagrange's theorem, then, it would have order
+      $|S_n|$.  Therefore, $G A_n = S_n$, and, by the 
+      second isomorphism theorem,
+      \[
+      G/(G\cap A_n) \cong G A_n/A_n = S_n/A_n.
+      \]
+      This rules out $G\cap A_n = (e)$, since that would give $G \cong S_n/A_n
+      \cong \Z_2$ (abelian), contradicting the hypothesis.
+      \qed
+      ~\\
+      {\bf Remark:}  Although the first proof above is completely elementary, the second is worth
+      noting since it reveals useful information even when we don't assume $G$ is
+      simple and nonabelian.  For example, if $G$ is a subgroup of $S_n$
+      containing an odd permutation, then we can show that exactly half of the
+      elements of $G$ are even and half are odd.  Indeed, under these conditions 
+      we have $G A_n = S_n$ (as in the second proof above), and then the second isomorphism
+      theorem implies $|G/(G\cap A_n)| =|S_n/A_n|=2$. Therefore, $|G\cap A_n| =|G|/2$,
+      which says that half the elements of $G$ belong to $A_n$, as claimed. 
+
+      \medskip
+    \item
+      Let $H\leq G$, and let $G/H$ denote the set of left cosets of $G$.  Let
+      $\Sym(G/H)$ denote the group of permutations of the set $G/H$.  Then the map 
+      $\lambda: G\rightarrow  \Sym(G/H)$---defined by 
+      $\lambda(g) = \lambda_g$, where $\lambda_g(xH) = gxH$---is a 
+      monomorphism of $G$ into $\Sym(G/H)$.  To prove this, we first show that 
+      $\lambda(g) = \lambda_g$ is indeed a bijection of $G/H$---that is,
+      $\lambda_g \in \Sym(G/H)$---then we show that 
+      $\lambda$ is a homomorphism of $G$, and finally we show that the kernel
+      subgroup of $\lambda$ is $\{e\}$ (so $\lambda$ is a monomorphism).
+
+      To see that $\lambda_g$ is one-to-one, observe that
+      \begin{align*}
+      \lambda_g(xH) = \lambda_g(yH) 
+      \quad &\Longrightarrow \quad 
+      gxH = gyH
+      \quad \Longrightarrow \quad 
+      (gy)^{-1}gx \in H\\
+      \quad &\Longrightarrow \quad 
+      y^{-1}x \in H
+      \quad \Longrightarrow \quad 
+      xH = yH.
+      \end{align*}
+
+
+      To see that $\lambda_g$ is onto, fix $xH\in G/H$, and note that
+      $\lambda_g(g^{-1}xH) = gg^{-1}xH = xH$.
+
+      To see that $\lambda$ is a homomorphism, note that for any $xH \in G/H$ we have
+      \[
+      \lambda_{g_1 g_2}(xH) = g_1g_2 xH = \lambda_{g_1}(g_2 x H) = 
+      \lambda_{g_1}\circ \lambda_{g_2}( x H).
+      \]
+      That is, $\lambda(g_1 g_2) = \lambda(g_1)\lambda(g_2)$, so $\lambda$
+      is a homomorphism.
+
+      Finally, note that the kernel subgroup of $\lambda$, which we denote by
+      $N_\lambda$, is a normal subgroup of $G$.  Therefore, as $G$ is simple,
+      either $N_\lambda = \{e\}$, or $N_\lambda = G$.  But
+      \begin{align*}
+      N_\lambda &= \{g\in G: \lambda_g = \id_{G/H}\} \qquad \text{($\id_{G/H} = $ the identity map on $G/H$)}\\
+      &= \{g\in G: \lambda_g(xH) = xH \, \text{ for all } x\in G \}\\
+      &=\{g\in G: gxH = xH \, \text{ for all } x\in G \}\\
+      &=\{g\in G: x^{-1}gxH = H \, \text{ for all } x\in G \}\\
+      &=\{g\in G: x^{-1}g x \in H \, \text{ for all } x\in G\}.
+      \end{align*}
+      If we let $x = e$ in the last expression, we see that $N_\lambda$ must be
+      a subgroup of $H$, and since $H$ is properly contained in $G$, we have
+      $N_\lambda \neq G$.  Therefore, $N_\lambda = \{e\}$, which proves that
+      $\lambda$ is one-to-one, hence a monomorphism.
+
+      \medskip
+
+      \item Let $H$ be a subgroup of $G$ of finite index $n>1$,
+        so $H \neq G$.  We must show that $G$ can be embedded into $A_n$.
+
+      In the previous part of the exercise we saw that $\lambda$ embeds $G$ into
+      $\Sym(G/H)$, where $G/H$ is the set of left cosets of $H$ in $G$.  
+      Now $[G:H] = |G/H| = n$, which implies
+      that $\Sym(G/H) \cong S_n$, the group of permutations of $n$ elements.  Therefore,
+      $G$ is isomorphic to a subgroup of $S_n$.  By the first part above, then, 
+      $G$ is isomorphic to a subgroup of~$A_n$.
+
+      \item Suppose $G$ is infinite.  We must show that $G$ has no proper subgroup of finite
+      index.  If, on the contrary, $H\leq G$ with $[G:H] = n$, then, $G$ would be isomorphic
+      to a subgroup of the finite group $A_n$, which is clearly impossible,
+      since $G$ is infinite.
+
+\end{enumerate}
+
+
+\end{enumerate}
+
+\end{document}
+
+

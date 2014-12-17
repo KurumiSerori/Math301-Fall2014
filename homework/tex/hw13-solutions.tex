@@ -1,0 +1,311 @@
+\documentclass[12pt,reqno]{amsart}
+\usepackage[top=2cm, left=2cm,right=2cm,bottom=2cm]{geometry}
+\renewcommand{\baselinestretch}{1.2}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{scalefnt}
+\usepackage{tikz}
+\usepackage{color,hyperref,enumerate,multicol}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.3}
+\hypersetup{colorlinks,breaklinks,
+            linkcolor=darkblue,urlcolor=darkblue,
+            anchorcolor=darkblue,citecolor=darkblue}
+            
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\pagestyle{empty}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\bL}{\ensuremath{\mathbf{L}}}
+\newcommand{\bP}{\ensuremath{\mathbf{P}}}
+\newcommand{\bQ}{\ensuremath{\mathbf{Q}}}
+\newcommand{\bA}{\ensuremath{\mathbf{A}}}
+\newcommand{\bB}{\ensuremath{\mathbf{B}}}
+\newcommand{\bG}{\ensuremath{\mathbf{G}}}
+\newcommand{\bH}{\ensuremath{\mathbf{H}}}
+\newcommand{\invG}{\ensuremath{\operatorname{inv}^{\bG}}}
+\newcommand{\invH}{\ensuremath{\operatorname{inv}^{\bH}}}
+\newcommand{\meet}{\ensuremath{\wedge}}
+\newcommand{\Meet}{\ensuremath{\bigwedge}}
+\newcommand{\<}{\ensuremath{\langle}}
+\renewcommand{\>}{\ensuremath{\rangle}}
+\newcommand{\join}{\ensuremath{\vee}}
+\renewcommand{\emptyset}{\ensuremath{\varnothing}}
+\renewcommand{\subset}{\ensuremath{\subsetneq}}
+\newcommand{\boldemph}{\emph}
+\newcommand{\lcm}{\ensuremath{\operatorname{lcm}}}
+\newcommand{\Sym}{\ensuremath{\operatorname{Sym}}}
+%\newcommand{\bG}{\ensuremath{\mathbf{G}}}
+
+\newcommand{\probskip}{\vskip1cm}
+
+\begin{document}
+\thispagestyle{empty}
+
+\noindent \textbf{Math 301} \hskip5cm {\bf Homework 13} \hfill {\bf Fall 2014}
+\vskip1cm
+\noindent {\bf Exercises:} Chapter 14: 1 (except the $GL_2( {\mathbb R} )$
+example), 2, 3, 9, 11 (justify!).\\
+{\bf Due date:} Friday, 12/12
+
+\medskip
+Recall, if $G$ acts on a set $X$ and $x, y \in X$, then $x$ is said
+to be \boldemph{$G$-equivalent} to $y$ if there exists a $g \in G$ such that 
+$gx =y$. We  write $x \sim_G y$ or $x \sim y$ if $x$ and $y$ are $G$-equivalent. 
+In class, we proved that the $G$-equivalent equivalence relation is reflexive and
+symmetric. You should check the transitive property on your own to complete the
+proof that $\sim$ is an equivalence relation on $X$. 
+ 
+%% \noindent {\bf Exercises:}
+\begin{enumerate}
+%% 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item[{\bf 14.1}] Each of the examples below describes an action of a group $G$
+  on a set $X$, which will give rise to the equivalence relation defined by
+  $G$-equivalence.  For each example, compute the equivalence classes of the
+  $G$-equivalent equivalence relation.  
+
+\medskip
+\noindent {\bf Solution:}
+
+%% {\bf Examples:}
+\begin{enumerate}
+\item
+%\begin{example}{D4_action}
+Let $G = D_4$ be the symmetry group of a square, $X = \{ 1, 2, 3, 4 \}$ the
+vertices of the square, and suppose $D_4$ consists of the following permutations: 
+\[
+\{ (1), (13), (24), (1432), (1234), (12)(34), (14)(23), (13)(24) \}.
+\]
+Then the $D_4$-equivalence classes are the orbits under the action of $D_4$ on
+$X$.  For example, the orbit of $1$ is 
+\[
+\mathcal{O}_1 = 
+\{\bar{\sigma} (1) : \sigma \in D_4\} = 
+\{\overline{(~)} 1, 
+\overline{(1234)} 1,
+\overline{(13)} 1, \overline{(1432)} 1\} = \{1, 2, 3, 4\} = X.
+\]
+So, in this example, we have $X \subseteq \mathcal{O}_1$, and since orbits partition the set $X$
+into a union of disjoint orbits (i.e., disjoint $G$-equivalent equivalence
+classes), we see that all elements of $X$ are in the same equivalence class.
+That is,  $\mathcal{O}_1 = \mathcal{O}_2 = \mathcal{O}_3 = \mathcal{O}_4 = X$.
+%% \end{example}
+ 
+ \medskip
+
+\item 
+%% \begin{example}{left_action}
+Let $X = G$ and let $G$ act on itself by the
+left regular action $\lambda_g(x) = gx$. Then the orbit of the identity element
+is all of $G$,
+\[\mathcal{O}_e = \{\lambda_g(e) : g\in G\} = \{ge : g\in G\} = G.\]
+So again we have only a single $G$-equivalent equivalence class,
+$\mathcal{O}_g = G$, for all $g\in G$.
+%% \end{example}
+ 
+ \medskip
+
+\item
+%% \begin{example}{conj_action}
+Let $X=G$, a group and let $H\leq G$. Then $G$ is an $H$-set under 
+the conjugation action:
+$\varphi: H \rightarrow \Sym(G)$ is defined by
+$\varphi_h(g) = hgh^{-1}$ for each $h\in H$.  Then the orbits are conjugacy
+classes with respect to $H$, that is,
+\[
+\mathcal{O}_g = \{\varphi_h(g) : h \in H\} = \{hgh^{-1} : h \in H\}.
+\]
+%% %% \end{example}
+ 
+ \medskip
+ 
+\item
+%% \begin{example}{left_coset_action}
+Let $H$ be a subgroup of $G$ and let $X = G/H$ be the set of left cosets
+of $H$.  The set $G/H$ is a $G$-set under the action
+$\lambda: G \rightarrow \Sym(G/H)$ given by 
+$\lambda_g(xH) = gxH$.
+In this case, all elements of $G/H$ are in the same orbit, so there is just one
+$G$-equivalent equivalence class---namely, for every $xH \in G/H$, 
+\[
+\mathcal{O}_{xH} = \{\lambda_g(xH) : g \in G\} = \{gxH : g \in G\} = 
+\{gH : g \in G\} = G/H.
+\]
+%% \end{example}
+\end{enumerate}
+
+\bigskip
+
+\item[{\bf 14.2}] \label{actions}
+Compute all $X_g$ and all $G_x$ for each of the following permutation
+groups. 
+\begin{enumerate}
+ 
+ \item
+$X= \{1, 2, 3\}$, \\
+$G=S_3=\{(~), (12), (13), (23), (123), (132)  \}$
+ 
+ \item
+$X = \{1, 2, 3, 4, 5, 6\}$, \\
+$G = \{(~), (12), (345), (354), (12)(345), (12)(354)  \}$
+ 
+\end{enumerate}
+
+\medskip
+
+\noindent {\bf Solution:}
+
+\begin{enumerate}
+ 
+ \item If
+$G=\{(~), (12), (13), (23), (123), (132)  \}$, and 
+if $X= \{1, 2, 3\}$ is a $G$-set under the left regular action, 
+$\bar{g}: x\mapsto gx$, then
+ \setlength\multicolsep{0pt}
+\begin{multicols}{2}
+   \begin{align*}
+     X_{(~)} &= \{x\in X : \overline{(~)} x = x\} = X\\
+     X_{(123)} &= \{x\in X : \overline{(123)} x = x\} = \emptyset\\
+     X_{(132)} &= \{x\in X : \overline{(132)} x = x\} = \emptyset
+   \end{align*}
+
+\columnbreak
+
+   \begin{align*}
+     X_{(12)} &= \{x\in X : \overline{(12)} x = x\} = \{3\}\\
+     X_{(13)} &= \{x\in X : \overline{(13)} x = x\} = \{2\}\\
+     X_{(23)} &= \{x\in X : \overline{(23)} x = x\} = \{1\}
+   \end{align*}
+\end{multicols}
+
+%\vskip-1cm
+
+   \begin{align*}
+     G_1 &= \{g\in G : \bar{g}(1) = 1\} = \{(~), (23)\}\\
+     G_2 &= \{g\in G : \bar{g}(2) = 2\} = \{(~), (13)\}\\
+     G_3 &= \{g\in G : \bar{g}(3) = 3\} = \{(~), (12)\}
+   \end{align*}
+
+\bigskip
+ 
+ \item If
+$G = \{(~), (12), (345), (354), (12)(345), (12)(354)  \}$, and 
+$X = \{1, 2, 3, 4, 5, 6\}$ is a $G$-set under the left regular action, then
+\begin{gather*}
+  X_{(~)} = X, \quad X_{(12)} =\{3,4,5,6\}, \\
+  X_{(345)} =  \{1, 2, 6\} = X_{(345)}, \quad
+  X_{(12)(345)} = \{6\} = X_{(12)(354)}.
+\end{gather*}
+\[
+  G_1  = G_2 = \{(~), (345), (354)\}, \quad
+  G_3= G_4 = G_5 = \{(~), (12)\} , \quad
+  G_6 = G.
+\]
+\end{enumerate}
+ 
+\bigskip
+
+\item[{\bf 14.3}]
+Compute the $G$-equivalent equivalence classes of $X$ for each of the $G$-sets in
+Exercise~14.2. For each $x \in X$ verify that 
+$|G|=|{\mathcal O}_x| \cdot |G_x|$.  
+
+\medskip
+
+\noindent {\bf Solution:}
+
+\begin{enumerate}
+ \item If
+$G=\{(~), (12), (13), (23), (123), (132)  \}$ and 
+$X= \{1, 2, 3\}$, then under the left regular action,
+$     \mathcal{O}_1 =      \mathcal{O}_2 =      \mathcal{O}_3 = \{1,2,3\} = X$,
+so, for each $x \in X$, we have $|G| = 6 = 2\cdot 3 = |\mathcal{O}_x|\cdot |G_x|$.
+
+\bigskip
+ 
+ \item If
+$G = \{(~), (12), (345), (354), (12)(345), (12)(354)  \}$, and 
+$X = \{1, 2, 3, 4, 5, 6\}$, then under the left regular action,
+$ \mathcal{O}_1 = \mathcal{O}_2=\{1, 2\}$, and 
+$\mathcal{O}_3 = \mathcal{O}_4 = \mathcal{O}_5= \{3,4,5\}$, and 
+$\mathcal{O}_6 = \{6\}$.
+Therefore, $  |\mathcal{O}_6|\cdot |G_6|  = 6\cdot 1= |G|$, and
+\begin{align*}
+|\mathcal{O}_x|\cdot |G_x| &= 2\cdot 3  =   |G| \; \text{ for } x \in \{1, 2\}, \text{ and }\\
+ |\mathcal{O}_x|\cdot |G_x| &= 3\cdot 2 =   |G|  \; \text{ for } x \in \{3, 4, 5\}.
+\end{align*}
+\end{enumerate}
+
+
+\bigskip
+
+\item[{\bf 14.9}]
+How many ways can the vertices of an equilateral triangle be colored
+using three different colors? 
+
+\medskip
+
+\noindent {\bf Solution:}
+Since the problem does not specify whether we should distinguish colorings that
+are equivalent up to rotations or reflections, there are three acceptable
+answers to this question.  However, the best solution would consider all
+reasonable interpretations of the question and provide an answer for each
+interpretation. 
+
+\begin{enumerate}
+\item \emph{Solution 1:}
+If we can distinguish the sides of the triangle, and we don't consider two
+colorings to be the same if they differ by reflection or rotation, then there
+are $3^3 = \mathbf{27}$ ways to color the triangle with 3 colors.
+
+\item \emph{Solution 2:} If we take colorings that differ by a rotation to
+  be equivalent, but we distinguish between colorings that differ by reflection,
+  then we consider the rotation subgroup $\{(~), (123), (132)\}$ (which is a
+  subgroup of the six-element group of symmetries of the triangle).  Since 
+  $(~) = (1)(2)(3)$ has 3 cycles and $(123)$ and $(132)$ each have one cycle, by
+  Proposition~14.8 of our textbook, the number of ways to color the sides of a
+  triangle with 3 colors up to rotation is
+  \[
+  \frac{1}{3}(3^3 + 2\cdot 3) = 3^2 + 2 = \mathbf{11}.
+  \]
+
+\item \emph{Solution 3:} If we take colorings that differ by a rotation to
+  be equivalent, and we also take colorings that differ by a reflection to be
+  equivalent, then we factor out by the full group of symmetries of
+  the triangle, $G = \{(~), (12), (13), (23), (123), (132)\}$.  Since 
+  $(12) = (12)(3)$ has two cycles, as does $(13)$ and $(23)$, then by
+  Proposition~14.8, the number of ways to color the sides of a
+  triangle with 3 colors up to rotation and reflection is
+  \[
+  \frac{1}{6}(3^3 + 2\cdot 3 + 3\cdot 3^2) = \frac{1}{6}(2\cdot 3^3 + 2\cdot 3)
+  = 3^2 + 1 = \mathbf{10}.
+  \]
+\end{enumerate}
+
+\bigskip
+
+\item[{\bf 14.11}]
+Up to a rotation, how many ways can the faces of a cube be colored
+with three different colors?  (Justify any formula you use.)
+
+\medskip
+
+\noindent {\bf Solution:}  There are 24 rotations of the cube.  They are
+\begin{itemize}
+\item one identity ``rotation'' $(1)(2)(3)(4)(5)(6)$, with 6 cycles in its decomposition,
+\item six $90^\circ$ rotations of the form $(1234)(5)(6)$, each with 3 cycles,
+\item eight $120^\circ$ rotations of the form $(145)(263)$, each with 2 cycles,
+\item six $180^\circ$ rotations of the form $(12)(34)(56)$, each with 3 cycles,
+\item three $180^\circ$ rotations of the form $(13)(24)(5)(6)$, each with 4 cycles.
+\end{itemize}
+Therefore, according to Proposition~14.8, the number of ways to color the faces
+of a cube with three different colors is
+\[
+\frac{1}{24}(3^6 + 12\cdot 3^3 + 8\cdot 3^2 + 3\cdot 3^4) = \mathbf{57}.
+\]
+ 
+\end{enumerate}
+\end{document}
+
+

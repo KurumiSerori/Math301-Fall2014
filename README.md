@@ -1,7 +1,8 @@
-This is the README.md file for the instructor branch of the repository.
+This is the README.md file of the **instructor** branch of the repository.
 
-**WARNING:** student use of files in this branch of the repository may constitute
-a breach of the academic honor code and could result in disciplinary action.
+**WARNING:** student use of files in the **instructor** branch of the repository
+may constitute a breach of the academic honor code and could result in
+disciplinary action.
 
 Math 301: Abstract Algebra I -- Fall 2014
 =========================================
